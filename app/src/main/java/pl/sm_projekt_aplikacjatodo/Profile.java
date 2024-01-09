@@ -11,7 +11,8 @@ public class Profile {
     @PrimaryKey(autoGenerate = true)
     private long profileId;
     private String username;
-    private Bitmap profilePicture;
+    //TU MUSI BC TYPE CONVERTER BO BITMAPY NIE ZAPISZESZ DO BAZY
+    //private Bitmap profilePicture;
 
 
     public long getProfileId() {
@@ -30,11 +31,11 @@ public class Profile {
         this.username = username;
     }
 
-    public Bitmap getProfilePicture() {
-        return profilePicture;
-    }
-
-    public void setProfilePicture(Bitmap profilePicture) {
-        this.profilePicture = profilePicture;
-    }
+//    public Bitmap getProfilePicture() {
+//        return profilePicture;
+//    }
+//
+//    public void setProfilePicture(Bitmap profilePicture) {
+//        this.profilePicture = profilePicture;
+//    }
 }
