@@ -3,24 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Tytuł na górze po środku -->
-    <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="Lista użytkowników"
-        android:textSize="20sp"
-        android:textStyle="bold" />
 
     <!-- RecyclerView dla listy użytkowników -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/userRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/titleTextView"
-        android:layout_marginTop="16dp"
         android:divider="@android:color/darker_gray"
         android:dividerHeight="1dp"
         android:padding="16dp" />
