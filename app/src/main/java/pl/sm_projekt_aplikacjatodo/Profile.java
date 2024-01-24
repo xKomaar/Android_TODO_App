@@ -13,7 +13,7 @@ import java.io.ByteArrayOutputStream;
 public class Profile {
     @PrimaryKey(autoGenerate = true)
     private long profileId;
-    private String username;
+    private String name;
     private byte[] profilePicture;
 
 
@@ -25,12 +25,12 @@ public class Profile {
         this.profileId = profileId;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public byte[] getProfilePicture() {
