@@ -14,7 +14,6 @@ public class Profile {
     @PrimaryKey(autoGenerate = true)
     private long profileId;
     private String username;
-    //TU MUSI BC TYPE CONVERTER BO BITMAPY NIE ZAPISZESZ DO BAZY
     private byte[] profilePicture;
 
 

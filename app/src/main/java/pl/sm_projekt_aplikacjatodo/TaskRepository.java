@@ -2,6 +2,7 @@ package pl.sm_projekt_aplikacjatodo;
 
 import android.app.Application;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Query;
 
 import java.util.List;
@@ -9,10 +10,12 @@ import java.util.List;
 public class TaskRepository {
 
     private final TaskDAO taskDAO;
+    private final LiveData<List<Task>> tasks;
 
     TaskRepository(Application application) {
         AppDatabase database = AppDatabase.getDatabase(application);
         taskDAO = database.taskDAO();
+        tasks = taskDAO.findAll();
     }
 
     void insert(Task task) {
@@ -31,8 +34,8 @@ public class TaskRepository {
         AppDatabase.databaseWriteExecutor.execute(taskDAO::deleteAll);
     }
 
-    public List<Task> findAll() {
-        return taskDAO.findAll();
+    public LiveData<List<Task>> findAll() {
+        return tasks;
     }
 
     public List<Task> findByTaskOwnerId(int taskOwnerId) {

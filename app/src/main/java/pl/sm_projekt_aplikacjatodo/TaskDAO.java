@@ -1,5 +1,6 @@
 package pl.sm_projekt_aplikacjatodo;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -25,7 +26,7 @@ public interface TaskDAO {
     void deleteAll();
 
     @Query("SELECT * FROM Task")
-    public List<Task> findAll();
+    public LiveData<List<Task>> findAll();
 
     @Query("SELECT * FROM Task WHERE taskOwnerId = :taskOwnerId")
     public List<Task> findByTaskOwnerId(int taskOwnerId);

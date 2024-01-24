@@ -10,8 +10,7 @@ public class Task {
     private long taskId;
     private String title;
     private String description;
-    //TU MUSI BC TYPE CONVERTER BO BITMAPY NIE ZAPISZESZ DO BAZY
-    //private LocalDateTime dateTime;
+    private String dateTime;
     private boolean notify;
     private boolean done;
     private long taskOwnerId;
@@ -49,13 +48,20 @@ public class Task {
         this.description = description;
     }
 
-//    public LocalDateTime getDateTime() {
-//        return dateTime;
-//    }
+    public String getDateTime() {
+        return dateTime;
+    }
 
-//    public void setDateTime(LocalDateTime dateTime) {
-//        this.dateTime = dateTime;
-//    }
+    public LocalDateTime getLocalDateTime() {
+        return LocalDateTime.parse(dateTime);
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime.toString();
+    }
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
+    }
 
     public boolean isNotify() {
         return notify;
