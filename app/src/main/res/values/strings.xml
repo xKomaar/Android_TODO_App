@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">SM_Projekt_AplikacjaTODO</string>
     <string name="new_profile">Stwórz nowy profil</string>
-    <string name="profile">Profile</string>
+    <string name="profiles">Profile</string>
     <string name="nazwa_profilu">Nazwa profilu</string>
     <string name="zmien_zdjecie">Zmień zdjęcie</string>
     <string name="stworz_nowy_profil">Stwórz nowy profil</string>

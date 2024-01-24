@@ -1,43 +1,38 @@
-package pl.sm_projekt_aplikacjatodo;
+package pl.sm_projekt_aplikacjatodo.database;
 
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
-import androidx.room.Delete;
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
-import androidx.room.Query;
-import androidx.room.Transaction;
-import androidx.room.Update;
 
 import java.util.List;
+
+import pl.sm_projekt_aplikacjatodo.Profile;
+import pl.sm_projekt_aplikacjatodo.ProfileWithTasks;
 
 public class ProfileRepository {
 
     private final ProfileDAO profileDAO;
-    private final LiveData<List<ProfileWithTasks>> profiles;
 
-    ProfileRepository(Application application) {
+    public ProfileRepository(Application application) {
         AppDatabase database = AppDatabase.getDatabase(application);
         profileDAO = database.profileDAO();
-        profiles = profileDAO.findAllProfilesWithTasks();
     }
 
 
-    void insert(Profile profile) {
+    public void insert(Profile profile) {
         AppDatabase.databaseWriteExecutor.execute(() -> profileDAO.insert(profile));
     }
 
-    void delete(Profile profile) {
+    public void delete(Profile profile) {
         AppDatabase.databaseWriteExecutor.execute(() -> profileDAO.delete(profile));
     }
 
-    void update(Profile profile) {
+    public void update(Profile profile) {
         AppDatabase.databaseWriteExecutor.execute(() -> profileDAO.update(profile));
     }
 
     public LiveData<List<ProfileWithTasks>> findAllProfilesWithTasks() {
-        return profiles;
+        return profileDAO.findAllProfilesWithTasks();
     }
 
     public ProfileWithTasks findProfileWithTasksByProfileId(int profileId) {

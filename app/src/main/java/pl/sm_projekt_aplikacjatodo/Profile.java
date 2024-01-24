@@ -4,7 +4,10 @@ package pl.sm_projekt_aplikacjatodo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.ByteArrayOutputStream;
@@ -14,8 +17,22 @@ public class Profile {
     @PrimaryKey(autoGenerate = true)
     private long profileId;
     private String name;
+
+    @Nullable
     private byte[] profilePicture;
 
+    public Profile() {
+
+    }
+
+    public Profile(String name) {
+        this.name = name;
+    }
+
+    public Profile(String name, Bitmap image) {
+        this.name = name;
+        setProfilePicture(image);
+    }
 
     public long getProfileId() {
         return profileId;

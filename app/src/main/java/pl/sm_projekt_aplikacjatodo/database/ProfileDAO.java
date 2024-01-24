@@ -1,4 +1,4 @@
-package pl.sm_projekt_aplikacjatodo;
+package pl.sm_projekt_aplikacjatodo.database;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -10,6 +10,9 @@ import androidx.room.Transaction;
 import androidx.room.Update;
 
 import java.util.List;
+
+import pl.sm_projekt_aplikacjatodo.Profile;
+import pl.sm_projekt_aplikacjatodo.ProfileWithTasks;
 
 @Dao
 public interface ProfileDAO {
@@ -28,9 +31,9 @@ public interface ProfileDAO {
 
     @Transaction
     @Query("SELECT * FROM Profile")
-    public LiveData<List<ProfileWithTasks>> findAllProfilesWithTasks();
+    LiveData<List<ProfileWithTasks>> findAllProfilesWithTasks();
 
     @Transaction
     @Query("SELECT * FROM Profile WHERE profileId = :profileId")
-    public ProfileWithTasks findProfileWithTasksByProfileId(int profileId);
+    ProfileWithTasks findProfileWithTasksByProfileId(int profileId);
 }
