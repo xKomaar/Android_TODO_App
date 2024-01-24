@@ -38,13 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
         profileRepository = new ProfileRepository(this.getApplication());
         profileRepository.findAllProfilesWithTasks().observe(this, profileAdapter::setProfiles);
-
-        if(profileRepository.findAllProfilesWithTasks().getValue() != null) {
-            Log.i("PROFILE LISTA", ""+profileRepository.findAllProfilesWithTasks().getValue().size());
-        }
-        else {
-            Log.i("PROFILE LISTA", "null");
-        }
     }
 
     @Override
@@ -78,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             });
 
             profileNameTextView = itemView.findViewById(R.id.profile_name);
-            profilePictureImageView = itemView.findViewById(R.id.profile_image);
+            profilePictureImageView = itemView.findViewById(R.id.profile_picture);
         }
 
         public void bind(ProfileWithTasks profileWithTasks) {
@@ -89,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 profilePictureImageView.setImageBitmap(profileWithTasks.getProfile().getBitmapProfilePicture());
             }
-
         }
     }
 
@@ -122,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         }
         void setProfiles(List<ProfileWithTasks> profilesWithTasks) {
             this.profilesWithTasks = profilesWithTasks;
+            notifyDataSetChanged();
         }
     }
 }
