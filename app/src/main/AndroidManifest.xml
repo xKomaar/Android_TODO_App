@@ -13,16 +13,22 @@
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".TaskViewActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SM_Projekt_AplikacjaTODO"/>
+        <activity
             android:name=".TaskListActivity"
             android:exported="false"
             android:label="@string/title_activity_card_view"
             android:theme="@style/Theme.SM_Projekt_AplikacjaTODO" />
         <activity
             android:name=".NewProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.SM_Projekt_AplikacjaTODO"/>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.SM_Projekt_AplikacjaTODO">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

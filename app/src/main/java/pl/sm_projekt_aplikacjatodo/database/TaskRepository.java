@@ -42,4 +42,8 @@ public class TaskRepository {
     public LiveData<List<Task>> findAllByTaskOwnerId(int taskOwnerId) {
         return taskDAO.findAllByTaskOwnerId(taskOwnerId);
     }
+
+    public LiveData<Task> findTaskByTaskId(int taskId) {
+        return taskDAO.findTaskByTaskId(taskId);
+    }
 }

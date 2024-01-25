@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.List;
 
 import pl.sm_projekt_aplikacjatodo.database.TaskRepository;
@@ -33,6 +35,12 @@ public class TaskListActivity extends AppCompatActivity {
         final TaskAdapter taskAdapter = new TaskAdapter();
         recyclerView.setAdapter(taskAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+
+        FloatingActionButton addTaskButton = findViewById(R.id.add_task_button);
+        addTaskButton.setOnClickListener(view -> {
+//            Intent intent = new Intent(TaskListActivity.this, NewTaskActivity.class);
+//            startActivity(intent);
+        });
 
         Intent intent = getIntent();
 
@@ -56,7 +64,9 @@ public class TaskListActivity extends AppCompatActivity {
             isDoneCheckBox = itemView.findViewById(R.id.isDoneCheckBox);
 
             itemView.setOnClickListener(view -> {
-                //KOD DO ACTIVITY POJEDYNCZEGO TASKA
+                Intent intent = new Intent(TaskListActivity.this, TaskViewActivity.class);
+                intent.putExtra("taskId", task.getTaskId());
+                startActivity(intent);
             });
         }
 
@@ -65,6 +75,10 @@ public class TaskListActivity extends AppCompatActivity {
             this.taskTitleTextView.setText(task.getTitle());
             this.taskDateTextView.setText(task.getDateTime());
             this.isDoneCheckBox.setChecked(task.isDone());
+            isDoneCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                task.setDone(isChecked);
+                taskRepository.update(task);
+            });
         }
     }
 

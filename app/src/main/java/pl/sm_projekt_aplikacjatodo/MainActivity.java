@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.List;
 
 import pl.sm_projekt_aplikacjatodo.database.ProfileRepository;
@@ -37,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(profileAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        FloatingActionButton addProfileButton = findViewById(R.id.add_profile_button);
+        addProfileButton.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, NewProfileActivity.class);
+            startActivity(intent);
+        });
+
         profileRepository = new ProfileRepository(this.getApplication());
         profileRepository.findAllProfiles().observe(this, profileAdapter::setProfiles);
     }
@@ -45,16 +53,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         this.menu = menu;
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.profile_pick_menu, menu);
+        //TODO: TU DODANIE PRZYCISKOW DO MENU NP WYSZUKIWANIE
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.menu_new_profile_button) {
-            Intent intent = new Intent(MainActivity.this, NewProfileActivity.class);
-            startActivity(intent);
-        }
+        //TODO: TU AKCJE DO MENU JAK BEDZIE
         return super.onOptionsItemSelected(item);
     }
 

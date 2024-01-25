@@ -8,6 +8,7 @@
     <string name="stworz_nowy_profil">Stwórz nowy profil</string>
     <string name="stworz_profil">Stwórz profil</string>
     <string name="return_button">Powrót</string>
+    <string name="save_button">Zapisz</string>
     <string name="title_activity_card_view">CardViewActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

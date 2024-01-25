@@ -45,7 +45,7 @@
                 android:id="@+id/isDoneCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CheckBox"
+                android:text="is Done?"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/taskDate" />
 

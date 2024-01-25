@@ -25,7 +25,7 @@ public interface ProfileDAO {
 
     @Update
     void update(Profile profile);
-
+    @Transaction
     @Query("DELETE FROM Profile")
     void deleteAll();
 

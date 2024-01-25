@@ -4,6 +4,9 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 @Entity
 public class Task {
     @PrimaryKey(autoGenerate = true)
@@ -61,7 +64,8 @@ public class Task {
     }
 
     public LocalDateTime getLocalDateTime() {
-        return LocalDateTime.parse(dateTime);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.US);
+        return LocalDateTime.parse(dateTime, formatter);
     }
 
     public void setDateTime(LocalDateTime dateTime) {
