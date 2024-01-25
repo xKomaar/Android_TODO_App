@@ -16,17 +16,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.Locale;
 
 import pl.sm_projekt_aplikacjatodo.database.TaskRepository;
 import pl.sm_projekt_aplikacjatodo.model.Task;
 
-public class TaskViewActivity extends AppCompatActivity {
+public class NewTaskActivity extends AppCompatActivity {
 
     private final Calendar calendar = Calendar.getInstance();
     private TaskRepository taskRepository;
@@ -50,54 +46,50 @@ public class TaskViewActivity extends AppCompatActivity {
         notifyCheckBox = findViewById(R.id.notifyCheckBox);
         saveButton = findViewById(R.id.button_save);
 
-        Intent intent = getIntent();
         taskRepository = new TaskRepository(this.getApplication());
-        taskRepository.findTaskByTaskId(intent.getIntExtra("taskId", -1)).observe(this, task -> {
-            if(task != null) {
-                setTask(task);
+
+        task = new Task();
+
+        DatePickerDialog.OnDateSetListener date = (view, year, month, day) -> {
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, month);
+            calendar.set(Calendar.DAY_OF_MONTH, day);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            dateTextView.setText(calendar.getTime().toInstant().atZone(ZoneId.systemDefault())
+                    .toLocalDateTime().format(formatter));
+            task.setDateTime(calendar.getTime().toInstant().atZone(ZoneId.systemDefault())
+                    .toLocalDateTime().format(formatter));
+        };
+        dateTextView.setOnClickListener(view -> {
+            if (!isFinishing()) {
+                new DatePickerDialog(NewTaskActivity.this, date, calendar.get(Calendar.YEAR),
+                        calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+                        .show();
             }
+        });
+        dateTextView.setText(getString(R.string.pickDate));
 
-            titleEditText.setText(task.getTitle());
+        notifyCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> task.setNotify(isChecked));
 
-            DatePickerDialog.OnDateSetListener date = (view, year, month, day) -> {
-                calendar.set(Calendar.YEAR, year);
-                calendar.set(Calendar.MONTH, month);
-                calendar.set(Calendar.DAY_OF_MONTH, day);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-                dateTextView.setText(calendar.getTime().toInstant().atZone(ZoneId.systemDefault())
-                        .toLocalDateTime().format(formatter));
-                task.setDateTime(calendar.getTime().toInstant().atZone(ZoneId.systemDefault())
-                        .toLocalDateTime().format(formatter));
-            };
-            dateTextView.setOnClickListener(view -> {
-                if (!isFinishing()) {
-                    new DatePickerDialog(TaskViewActivity.this, date, calendar.get(Calendar.YEAR),
-                            calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
-                            .show();
-                }
-            });
-            dateTextView.setText(task.getDateTime());
-
-            descriptionEditText.setText(task.getDescription());
-
-            isDoneCheckBox.setChecked(task.isDone());
-            isDoneCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> task.setDone(isChecked));
-
-            notifyCheckBox.setChecked(task.isNotify());
-            notifyCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> task.setNotify(isChecked));
-
-            saveButton.setOnClickListener(view -> {
-                if(!titleEditText.getText().toString().isEmpty()) {
+        saveButton.setOnClickListener(view -> {
+            if(!titleEditText.getText().toString().isEmpty()) {
+                if(!dateTextView.getText().toString().equals(getString(R.string.pickDate))) {
                     task.setTitle(titleEditText.getText().toString());
                     task.setDescription(descriptionEditText.getText().toString());
-                    taskRepository.update(task);
+                    task.setDone(false);
+                    task.setTaskOwnerId(getIntent().getIntExtra("ownerId", -1));
+                    taskRepository.insert(task);
                     finish();
                 } else {
-                    Toast.makeText(TaskViewActivity.this, getString(R.string.emptyTitle),
+                    Toast.makeText(NewTaskActivity.this, getString(R.string.emptyDate),
                             Toast.LENGTH_SHORT).show();
                 }
-            });
+            } else {
+                Toast.makeText(NewTaskActivity.this, getString(R.string.emptyTitle),
+                        Toast.LENGTH_SHORT).show();
+            }
         });
+
     }
 
     @Override
@@ -114,8 +106,5 @@ public class TaskViewActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
-    }
-    public void setTask(Task task) {
-        this.task = task;
     }
 }

@@ -18,6 +18,10 @@ public class Task {
     private boolean done;
     private Integer taskOwnerId;
 
+    public Task() {
+
+    }
+
     public Task(String title, String description, String dateTime, boolean notify, boolean done, int taskOwnerId) {
         this.title = title;
         this.description = description;

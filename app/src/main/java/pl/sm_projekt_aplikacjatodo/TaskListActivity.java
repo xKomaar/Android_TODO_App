@@ -11,6 +11,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -25,6 +28,7 @@ import pl.sm_projekt_aplikacjatodo.model.Task;
 
 public class TaskListActivity extends AppCompatActivity {
     private TaskRepository taskRepository;
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +40,16 @@ public class TaskListActivity extends AppCompatActivity {
         recyclerView.setAdapter(taskAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
-        FloatingActionButton addTaskButton = findViewById(R.id.add_task_button);
-        addTaskButton.setOnClickListener(view -> {
-//            Intent intent = new Intent(TaskListActivity.this, NewTaskActivity.class);
-//            startActivity(intent);
-        });
-
         Intent intent = getIntent();
 
         this.setTitle(getString(R.string.profile) + " " + intent.getStringExtra("profileName"));
+
+        FloatingActionButton addTaskButton = findViewById(R.id.add_task_button);
+        addTaskButton.setOnClickListener(view -> {
+            Intent newIntent = new Intent(TaskListActivity.this, NewTaskActivity.class);
+            newIntent.putExtra("ownerId", intent.getIntExtra("profileId", -1));
+            startActivity(newIntent);
+        });
 
         taskRepository = new TaskRepository(this.getApplication());
         taskRepository.findAllByTaskOwnerId(intent.getIntExtra("profileId", -1)).observe(this, taskAdapter::setTasks);
@@ -114,5 +119,20 @@ public class TaskListActivity extends AppCompatActivity {
             this.tasks = tasks;
             notifyDataSetChanged();
         }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        this.menu = menu;
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.task_list_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.return_to_profiles_button) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
