@@ -58,4 +58,8 @@ dependencies {
 
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.3.0-rc01")
+
+//    Dependencies do działania API
+    implementation ("com.fasterxml.jackson.core:jackson-databind:2.12.5")
+
 }

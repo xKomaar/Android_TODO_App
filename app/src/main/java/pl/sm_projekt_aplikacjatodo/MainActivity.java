@@ -21,8 +21,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
+import pl.sm_projekt_aplikacjatodo.api.WeatherApi;
 import pl.sm_projekt_aplikacjatodo.database.ProfileRepository;
 import pl.sm_projekt_aplikacjatodo.model.Profile;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
 
         profileRepository = new ProfileRepository(this.getApplication());
         profileRepository.findAllProfiles().observe(this, profileAdapter::setProfiles);
+
+//        Test pogody
+        WeatherApi weatherTask = new WeatherApi();
+        weatherTask.execute();
     }
 
     @Override
