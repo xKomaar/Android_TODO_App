@@ -70,7 +70,7 @@ public class TaskListActivity extends AppCompatActivity {
             itemView.setOnClickListener(view -> {
                 Intent intent = new Intent(TaskListActivity.this, TaskViewActivity.class);
                 intent.putExtra("taskId", task.getTaskId());
-                startActivityForResult(intent,0);
+                startActivity(intent);
             });
         }
 
@@ -134,7 +134,7 @@ public class TaskListActivity extends AppCompatActivity {
         } else if (item.getItemId() == R.id.edit_profile) {
             Intent intent = new Intent(TaskListActivity.this, EditProfileActivity.class);
             intent.putExtra("profileId", getIntent().getIntExtra("profileId", -1));
-            startActivity(intent);
+            startActivityForResult(intent, 0);
         }
         return super.onOptionsItemSelected(item);
     }
