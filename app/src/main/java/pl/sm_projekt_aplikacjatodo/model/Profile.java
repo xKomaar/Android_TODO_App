@@ -15,7 +15,7 @@ import java.io.ByteArrayOutputStream;
 @Entity
 public class Profile {
     @PrimaryKey(autoGenerate = true)
-    private long profileId;
+    private Integer profileId;
     private String name;
 
     @Nullable
@@ -34,11 +34,11 @@ public class Profile {
         setProfilePicture(image);
     }
 
-    public long getProfileId() {
+    public Integer getProfileId() {
         return profileId;
     }
 
-    public void setProfileId(long profileId) {
+    public void setProfileId(int profileId) {
         this.profileId = profileId;
     }
 

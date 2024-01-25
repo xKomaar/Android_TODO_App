@@ -31,5 +31,5 @@ public interface TaskDAO {
     public LiveData<List<Task>> findAll();
 
     @Query("SELECT * FROM Task WHERE taskOwnerId = :taskOwnerId")
-    public List<Task> findByTaskOwnerId(int taskOwnerId);
+    public LiveData<List<Task>> findAllByTaskOwnerId(int taskOwnerId);
 }

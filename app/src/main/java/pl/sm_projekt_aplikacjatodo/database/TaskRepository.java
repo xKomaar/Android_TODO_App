@@ -39,7 +39,7 @@ public class TaskRepository {
         return tasks;
     }
 
-    public List<Task> findByTaskOwnerId(int taskOwnerId) {
-        return taskDAO.findByTaskOwnerId(taskOwnerId);
+    public LiveData<List<Task>> findAllByTaskOwnerId(int taskOwnerId) {
+        return taskDAO.findAllByTaskOwnerId(taskOwnerId);
     }
 }

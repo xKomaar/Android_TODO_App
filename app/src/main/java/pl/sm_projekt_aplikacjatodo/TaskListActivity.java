@@ -2,71 +2,103 @@ package pl.sm_projekt_aplikacjatodo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import pl.sm_projekt_aplikacjatodo.database.TaskRepository;
+import pl.sm_projekt_aplikacjatodo.model.Task;
+
 public class TaskListActivity extends AppCompatActivity {
-    RecyclerView recyclerView;
-    Adapter adapter;
-    ArrayList<String> tasks;
+    private TaskRepository taskRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_card_view);
-        tasks = new ArrayList<>();
-        // TU BEDZIE DODAWANIE DO LISTY LISTE TASKOW
-        //tasks.add()
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new Adapter(this,tasks);
-        recyclerView.setAdapter(adapter);
+        setContentView(R.layout.task_list_activity);
+
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        final TaskAdapter taskAdapter = new TaskAdapter();
+        recyclerView.setAdapter(taskAdapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+
+        Intent intent = getIntent();
+
+        this.setTitle(getString(R.string.profile) + " " + intent.getStringExtra("profileName"));
+
+        taskRepository = new TaskRepository(this.getApplication());
+        taskRepository.findAllByTaskOwnerId(intent.getIntExtra("profileId", -1)).observe(this, taskAdapter::setTasks);
     }
 
-    public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
+    private class TaskHolder extends RecyclerView.ViewHolder{
+        private TextView taskTitleTextView;
+        private TextView taskDateTextView;
+        private CheckBox isDoneCheckBox;
+        private Task task;
 
-        private LayoutInflater layoutInflater;
-        private List<String> data;
+        public TaskHolder(LayoutInflater inflater, ViewGroup parent) {
+            super(inflater.inflate(R.layout.custom_card, parent, false));
 
-        Adapter(Context context, List<String> data){
-            this.layoutInflater = LayoutInflater.from(context);
-            this.data = data;
+            taskTitleTextView = itemView.findViewById(R.id.taskTitle);
+            taskDateTextView = itemView.findViewById(R.id.taskDate);
+            isDoneCheckBox = itemView.findViewById(R.id.isDoneCheckBox);
+
+            itemView.setOnClickListener(view -> {
+                //KOD DO ACTIVITY POJEDYNCZEGO TASKA
+            });
         }
+
+        public void bind(Task task) {
+            this.task = task;
+            this.taskTitleTextView.setText(task.getTitle());
+            this.taskDateTextView.setText(task.getDateTime());
+            this.isDoneCheckBox.setChecked(task.isDone());
+        }
+    }
+
+    private class TaskAdapter extends RecyclerView.Adapter<TaskHolder> {
+
+        private List<Task> tasks;
+
         @NonNull
         @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = layoutInflater.inflate(R.layout.custom_card,parent, false);
-            return new ViewHolder(view);
+        public TaskHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new TaskHolder(getLayoutInflater(), parent);
         }
-
         @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            String task = data.get(position);
-            holder.taskTitle.setText(task);
+        public void onBindViewHolder(@NonNull TaskHolder holder, int position) {
+            if(tasks != null) {
+                Task task = tasks.get(position);
+                holder.bind(task);
+            } else {
+                Log.d("TaskListActivity", "No tasks");
+            }
         }
 
         @Override
         public int getItemCount() {
-            return data.size();
+            if(tasks != null) {
+                return tasks.size();
+            } else {
+                return 0;
+            }
         }
 
-        public class ViewHolder extends RecyclerView.ViewHolder{
-            TextView taskTitle;
-
-            public ViewHolder(@NonNull View itemView) {
-                super(itemView);
-                taskTitle = itemView.findViewById(R.id.taskTitle);
-            }
+        void setTasks(List<Task> tasks) {
+            this.tasks = tasks;
+            notifyDataSetChanged();
         }
     }
 }

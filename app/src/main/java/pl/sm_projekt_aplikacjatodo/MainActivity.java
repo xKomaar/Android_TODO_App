@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
             itemView.setOnClickListener(view -> {
                 Intent intent = new Intent(MainActivity.this, TaskListActivity.class);
                 intent.putExtra("profileId", profile.getProfileId());
+                intent.putExtra("profileName", profile.getName());
                 startActivity(intent);
             });
 

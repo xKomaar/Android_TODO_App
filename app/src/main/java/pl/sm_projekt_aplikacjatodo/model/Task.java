@@ -7,15 +7,15 @@ import java.time.LocalDateTime;
 @Entity
 public class Task {
     @PrimaryKey(autoGenerate = true)
-    private long taskId;
+    private Integer taskId;
     private String title;
     private String description;
     private String dateTime;
     private boolean notify;
     private boolean done;
-    private long taskOwnerId;
+    private Integer taskOwnerId;
 
-    public Task(String title, String description, String dateTime, boolean notify, boolean done, long taskOwnerId) {
+    public Task(String title, String description, String dateTime, boolean notify, boolean done, int taskOwnerId) {
         this.title = title;
         this.description = description;
         this.dateTime = dateTime;
@@ -24,19 +24,19 @@ public class Task {
         this.taskOwnerId = taskOwnerId;
     }
 
-    public long getTaskId() {
+    public Integer getTaskId() {
         return taskId;
     }
 
-    public void setTaskId(long taskId) {
+    public void setTaskId(int taskId) {
         this.taskId = taskId;
     }
 
-    public long getTaskOwnerId() {
+    public Integer getTaskOwnerId() {
         return taskOwnerId;
     }
 
-    public void setTaskOwnerId(long taskOwnerId) {
+    public void setTaskOwnerId(int taskOwnerId) {
         this.taskOwnerId = taskOwnerId;
     }
 
