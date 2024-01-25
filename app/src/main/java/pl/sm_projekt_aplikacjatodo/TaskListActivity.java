@@ -15,7 +15,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CardViewActivity extends AppCompatActivity {
+public class TaskListActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     Adapter adapter;
     ArrayList<String> tasks;

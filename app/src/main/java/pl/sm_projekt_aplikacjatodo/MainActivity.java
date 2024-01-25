@@ -20,6 +20,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import pl.sm_projekt_aplikacjatodo.database.ProfileRepository;
+import pl.sm_projekt_aplikacjatodo.model.Profile;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         profileRepository = new ProfileRepository(this.getApplication());
-        profileRepository.findAllProfilesWithTasks().observe(this, profileAdapter::setProfiles);
+        profileRepository.findAllProfiles().observe(this, profileAdapter::setProfiles);
     }
 
     @Override
@@ -53,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.menu_new_profile_button) {
             Intent intent = new Intent(MainActivity.this, NewProfileActivity.class);
             startActivity(intent);
-
         }
         return super.onOptionsItemSelected(item);
     }
@@ -62,31 +62,33 @@ public class MainActivity extends AppCompatActivity {
 
         private TextView profileNameTextView;
         private ImageView profilePictureImageView;
-        private ProfileWithTasks profileWithTasks;
+        private Profile profile;
         public ProfileHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.profile_list_item, parent, false));
 
             itemView.setOnClickListener(view -> {
-                //PRZEJSCIE DO TASKOW W TYM PROFILU
+                Intent intent = new Intent(MainActivity.this, TaskListActivity.class);
+                intent.putExtra("profileId", profile.getProfileId());
+                startActivity(intent);
             });
 
             profileNameTextView = itemView.findViewById(R.id.profile_name);
             profilePictureImageView = itemView.findViewById(R.id.profile_picture);
         }
 
-        public void bind(ProfileWithTasks profileWithTasks) {
-            this.profileWithTasks = profileWithTasks;
-            profileNameTextView.setText(profileWithTasks.getProfile().getName());
-            if(profileWithTasks.getProfile().getProfilePicture() == null) {
+        public void bind(Profile profile) {
+            this.profile = profile;
+            profileNameTextView.setText(profile.getName());
+            if(profile.getProfilePicture() == null) {
                 profilePictureImageView.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.mipmap.ic_blank_profile_foreground));
             } else {
-                profilePictureImageView.setImageBitmap(profileWithTasks.getProfile().getBitmapProfilePicture());
+                profilePictureImageView.setImageBitmap(profile.getBitmapProfilePicture());
             }
         }
     }
 
     private class ProfileAdapter extends RecyclerView.Adapter<ProfileHolder> {
-        private List<ProfileWithTasks> profilesWithTasks;
+        private List<Profile> profilesWithTasks;
 
         @NonNull
         @Override
@@ -97,8 +99,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull ProfileHolder holder, int position) {
             if (profilesWithTasks != null) {
-                ProfileWithTasks profileWithTasks = profilesWithTasks.get(position);
-                holder.bind(profileWithTasks);
+                Profile profile = profilesWithTasks.get(position);
+                holder.bind(profile);
             } else {
                 Log.d("MainActivity", "No profiles");
             }
@@ -112,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 return 0;
             }
         }
-        void setProfiles(List<ProfileWithTasks> profilesWithTasks) {
+        void setProfiles(List<Profile> profilesWithTasks) {
             this.profilesWithTasks = profilesWithTasks;
             notifyDataSetChanged();
         }

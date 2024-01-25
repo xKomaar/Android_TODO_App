@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-import pl.sm_projekt_aplikacjatodo.Profile;
-import pl.sm_projekt_aplikacjatodo.ProfileWithTasks;
+import pl.sm_projekt_aplikacjatodo.model.Profile;
+import pl.sm_projekt_aplikacjatodo.model.ProfileWithTasks;
 
 public class ProfileRepository {
 
@@ -35,7 +35,15 @@ public class ProfileRepository {
         return profileDAO.findAllProfilesWithTasks();
     }
 
+    public LiveData<List<Profile>> findAllProfiles() {
+        return profileDAO.findAllProfiles();
+    }
+
     public ProfileWithTasks findProfileWithTasksByProfileId(int profileId) {
         return profileDAO.findProfileWithTasksByProfileId(profileId);
+    }
+
+    public Profile findProfileByProfileId(int profileId) {
+        return profileDAO.findProfileByProfileId(profileId);
     }
 }

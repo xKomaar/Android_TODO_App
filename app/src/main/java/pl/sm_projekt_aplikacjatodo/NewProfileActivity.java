@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import pl.sm_projekt_aplikacjatodo.database.ProfileRepository;
+import pl.sm_projekt_aplikacjatodo.model.Profile;
 
 public class NewProfileActivity extends AppCompatActivity {
 

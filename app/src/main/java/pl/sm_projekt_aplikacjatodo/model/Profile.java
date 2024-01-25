@@ -1,4 +1,4 @@
-package pl.sm_projekt_aplikacjatodo;
+package pl.sm_projekt_aplikacjatodo.model;
 
 
 import android.graphics.Bitmap;

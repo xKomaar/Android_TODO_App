@@ -10,7 +10,7 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import pl.sm_projekt_aplikacjatodo.Task;
+import pl.sm_projekt_aplikacjatodo.model.Task;
 
 @Dao
 public interface TaskDAO {

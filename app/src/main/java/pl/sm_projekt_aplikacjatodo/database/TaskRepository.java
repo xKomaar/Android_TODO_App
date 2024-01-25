@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-import pl.sm_projekt_aplikacjatodo.Task;
+import pl.sm_projekt_aplikacjatodo.model.Task;
 
 public class TaskRepository {
 

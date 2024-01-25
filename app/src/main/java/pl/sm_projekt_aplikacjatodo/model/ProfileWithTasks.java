@@ -1,9 +1,12 @@
-package pl.sm_projekt_aplikacjatodo;
+package pl.sm_projekt_aplikacjatodo.model;
 
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
 import java.util.List;
+
+import pl.sm_projekt_aplikacjatodo.model.Profile;
+import pl.sm_projekt_aplikacjatodo.model.Task;
 
 public class ProfileWithTasks {
     @Embedded

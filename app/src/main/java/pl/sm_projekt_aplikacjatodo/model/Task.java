@@ -1,4 +1,4 @@
-package pl.sm_projekt_aplikacjatodo;
+package pl.sm_projekt_aplikacjatodo.model;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -15,6 +15,14 @@ public class Task {
     private boolean done;
     private long taskOwnerId;
 
+    public Task(String title, String description, String dateTime, boolean notify, boolean done, long taskOwnerId) {
+        this.title = title;
+        this.description = description;
+        this.dateTime = dateTime;
+        this.notify = notify;
+        this.done = done;
+        this.taskOwnerId = taskOwnerId;
+    }
 
     public long getTaskId() {
         return taskId;
