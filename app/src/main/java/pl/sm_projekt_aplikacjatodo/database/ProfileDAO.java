@@ -43,5 +43,5 @@ public interface ProfileDAO {
 
     @Transaction
     @Query("SELECT * FROM Profile WHERE profileId = :profileId")
-    Profile findProfileByProfileId(int profileId);
+    LiveData<Profile> findProfileByProfileId(int profileId);
 }

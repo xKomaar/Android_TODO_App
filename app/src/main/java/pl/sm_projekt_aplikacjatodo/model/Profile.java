@@ -17,8 +17,6 @@ public class Profile {
     @PrimaryKey(autoGenerate = true)
     private Integer profileId;
     private String name;
-
-    @Nullable
     private byte[] profilePicture;
 
     public Profile() {

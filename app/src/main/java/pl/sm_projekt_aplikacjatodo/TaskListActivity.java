@@ -1,6 +1,7 @@
 package pl.sm_projekt_aplikacjatodo;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -40,19 +41,17 @@ public class TaskListActivity extends AppCompatActivity {
         recyclerView.setAdapter(taskAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
-        Intent intent = getIntent();
-
-        this.setTitle(getString(R.string.profile) + " " + intent.getStringExtra("profileName"));
+        this.setTitle(getIntent().getStringExtra("profileName"));
 
         FloatingActionButton addTaskButton = findViewById(R.id.add_task_button);
         addTaskButton.setOnClickListener(view -> {
-            Intent newIntent = new Intent(TaskListActivity.this, NewTaskActivity.class);
-            newIntent.putExtra("ownerId", intent.getIntExtra("profileId", -1));
-            startActivity(newIntent);
+            Intent intent = new Intent(TaskListActivity.this, NewTaskActivity.class);
+            intent.putExtra("ownerId", getIntent().getIntExtra("profileId", -1));
+            startActivity(intent);
         });
 
         taskRepository = new TaskRepository(this.getApplication());
-        taskRepository.findAllByTaskOwnerId(intent.getIntExtra("profileId", -1)).observe(this, taskAdapter::setTasks);
+        taskRepository.findAllByTaskOwnerId(getIntent().getIntExtra("profileId", -1)).observe(this, taskAdapter::setTasks);
     }
 
     private class TaskHolder extends RecyclerView.ViewHolder{
@@ -81,8 +80,8 @@ public class TaskListActivity extends AppCompatActivity {
             this.taskDateTextView.setText(task.getDateTime());
             this.isDoneCheckBox.setChecked(task.isDone());
             isDoneCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                task.setDone(isChecked);
-                taskRepository.update(task);
+                this.task.setDone(isChecked);
+                taskRepository.update(this.task);
             });
         }
     }
@@ -132,7 +131,22 @@ public class TaskListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.return_to_profiles_button) {
             finish();
+        } else if (item.getItemId() == R.id.edit_profile) {
+            Intent intent = new Intent(TaskListActivity.this, EditProfileActivity.class);
+            intent.putExtra("profileId", getIntent().getIntExtra("profileId", -1));
+            startActivityForResult(intent, 0);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK && requestCode == 0 && data != null) {
+            String updatedProfileName = data.getStringExtra("profileName");
+            if (updatedProfileName != null) {
+                this.setTitle(updatedProfileName);
+            }
+        }
     }
 }
