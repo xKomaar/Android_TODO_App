@@ -54,10 +54,10 @@ public class TaskViewActivity extends AppCompatActivity {
         taskRepository = new TaskRepository(this.getApplication());
         taskRepository.findTaskByTaskId(intent.getIntExtra("taskId", -1)).observe(this, task -> {
             if(task != null) {
-                setTask(task);
+                this.task = task;
             }
 
-            titleEditText.setText(task.getTitle());
+            titleEditText.setText(this.task.getTitle());
 
             DatePickerDialog.OnDateSetListener date = (view, year, month, day) -> {
                 calendar.set(Calendar.YEAR, year);
@@ -66,7 +66,7 @@ public class TaskViewActivity extends AppCompatActivity {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
                 dateTextView.setText(calendar.getTime().toInstant().atZone(ZoneId.systemDefault())
                         .toLocalDateTime().format(formatter));
-                task.setDateTime(calendar.getTime().toInstant().atZone(ZoneId.systemDefault())
+                this.task.setDateTime(calendar.getTime().toInstant().atZone(ZoneId.systemDefault())
                         .toLocalDateTime().format(formatter));
             };
             dateTextView.setOnClickListener(view -> {
@@ -76,21 +76,21 @@ public class TaskViewActivity extends AppCompatActivity {
                             .show();
                 }
             });
-            dateTextView.setText(task.getDateTime());
+            dateTextView.setText(this.task.getDateTime());
 
-            descriptionEditText.setText(task.getDescription());
+            descriptionEditText.setText(this.task.getDescription());
 
-            isDoneCheckBox.setChecked(task.isDone());
-            isDoneCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> task.setDone(isChecked));
+            isDoneCheckBox.setChecked(this.task.isDone());
+            isDoneCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> this.task.setDone(isChecked));
 
-            notifyCheckBox.setChecked(task.isNotify());
-            notifyCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> task.setNotify(isChecked));
+            notifyCheckBox.setChecked(this.task.isNotify());
+            notifyCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> this.task.setNotify(isChecked));
 
             saveButton.setOnClickListener(view -> {
                 if(!titleEditText.getText().toString().isEmpty()) {
-                    task.setTitle(titleEditText.getText().toString());
-                    task.setDescription(descriptionEditText.getText().toString());
-                    taskRepository.update(task);
+                    this.task.setTitle(titleEditText.getText().toString());
+                    this.task.setDescription(descriptionEditText.getText().toString());
+                    taskRepository.update(this.task);
                     finish();
                 } else {
                     Toast.makeText(TaskViewActivity.this, getString(R.string.emptyTitle),
@@ -98,24 +98,5 @@ public class TaskViewActivity extends AppCompatActivity {
                 }
             });
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        this.menu = menu;
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.task_view_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.return_button) {
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-    public void setTask(Task task) {
-        this.task = task;
     }
 }

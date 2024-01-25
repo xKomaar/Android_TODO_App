@@ -6,4 +6,9 @@
         android:title="@string/return_button"
         app:showAsAction="always"
         />
+    <item
+        android:id="@+id/edit_profile"
+        android:title="@string/edit_profile"
+        app:showAsAction="always"
+        />
 </menu>

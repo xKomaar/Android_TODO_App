@@ -43,7 +43,7 @@ public class ProfileRepository {
         return profileDAO.findProfileWithTasksByProfileId(profileId);
     }
 
-    public Profile findProfileByProfileId(int profileId) {
+    public LiveData<Profile> findProfileByProfileId(int profileId) {
         return profileDAO.findProfileByProfileId(profileId);
     }
 }
