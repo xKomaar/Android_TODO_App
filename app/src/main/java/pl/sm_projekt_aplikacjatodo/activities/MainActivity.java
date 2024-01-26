@@ -1,4 +1,4 @@
-package pl.sm_projekt_aplikacjatodo;
+package pl.sm_projekt_aplikacjatodo.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,15 +19,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +42,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import pl.sm_projekt_aplikacjatodo.R;
 import pl.sm_projekt_aplikacjatodo.weatherApi.Weather;
 import pl.sm_projekt_aplikacjatodo.database.ProfileRepository;
 import pl.sm_projekt_aplikacjatodo.model.Profile;
@@ -56,8 +55,9 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Menu menu;
     private ProfileRepository profileRepository;
+
+    private ProgressBar loadingProgressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,25 +77,14 @@ public class MainActivity extends AppCompatActivity {
 
         MaterialButton checkWeatherButton = findViewById(R.id.check_weather_button);
         checkWeatherButton.setOnClickListener(view -> {
+            showLoading(true);
             checkWeatherBasedOnCurrentLocation();
         });
 
         profileRepository = new ProfileRepository(this.getApplication());
         profileRepository.findAllProfiles().observe(this, profileAdapter::setProfiles);
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        this.menu = menu;
-        MenuInflater menuInflater = getMenuInflater();
-        //TODO: TU DODANIE PRZYCISKOW DO MENU NP WYSZUKIWANIE
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        //TODO: TU AKCJE DO MENU JAK BEDZIE
-        return super.onOptionsItemSelected(item);
+        loadingProgressBar = findViewById(R.id.loadingProgressBar);
     }
 
     private class ProfileHolder extends RecyclerView.ViewHolder {
@@ -212,6 +201,8 @@ public class MainActivity extends AppCompatActivity {
                                 lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
                                 lp.gravity = Gravity.CENTER;
                                 popupDialog.show();
+
+                                showLoading(false);
                             }
                         }
                         @Override
@@ -219,6 +210,7 @@ public class MainActivity extends AppCompatActivity {
                             Snackbar.make(findViewById(R.id.main_view),
                                     getString(R.string.weather_download_fail),
                                     BaseTransientBottomBar.LENGTH_LONG).show();
+                            showLoading(false);
                         }
                     });
                 } else {
@@ -284,4 +276,9 @@ public class MainActivity extends AppCompatActivity {
         }
         return city;
     }
+
+    private void showLoading(boolean show) {
+        loadingProgressBar.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
 }

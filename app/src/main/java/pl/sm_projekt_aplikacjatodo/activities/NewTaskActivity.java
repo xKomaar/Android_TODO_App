@@ -1,7 +1,6 @@
-package pl.sm_projekt_aplikacjatodo;
+package pl.sm_projekt_aplikacjatodo.activities;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
+import pl.sm_projekt_aplikacjatodo.R;
 import pl.sm_projekt_aplikacjatodo.database.TaskRepository;
 import pl.sm_projekt_aplikacjatodo.model.Task;
 

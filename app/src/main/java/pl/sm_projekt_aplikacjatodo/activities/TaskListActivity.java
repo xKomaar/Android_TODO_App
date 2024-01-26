@@ -1,4 +1,4 @@
-package pl.sm_projekt_aplikacjatodo;
+package pl.sm_projekt_aplikacjatodo.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +21,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
+import pl.sm_projekt_aplikacjatodo.R;
 import pl.sm_projekt_aplikacjatodo.database.TaskRepository;
 import pl.sm_projekt_aplikacjatodo.model.Task;
 

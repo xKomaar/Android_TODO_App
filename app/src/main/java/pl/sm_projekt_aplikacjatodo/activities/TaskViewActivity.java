@@ -1,28 +1,22 @@
-package pl.sm_projekt_aplikacjatodo;
+package pl.sm_projekt_aplikacjatodo.activities;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.Locale;
 
+import pl.sm_projekt_aplikacjatodo.R;
 import pl.sm_projekt_aplikacjatodo.database.TaskRepository;
 import pl.sm_projekt_aplikacjatodo.model.Task;
 

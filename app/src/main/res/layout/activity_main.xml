@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".activities.MainActivity"
     android:id="@+id/main_view" >
 
     <androidx.recyclerview.widget.RecyclerView
@@ -26,6 +26,17 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
         android:src="@drawable/baseline_add_24"/>
+
+    <ProgressBar
+        android:id="@+id/loadingProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/add_profile_button"
+        android:layout_alignEnd="@+id/add_profile_button"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="141dp"
+        android:layout_marginBottom="-67dp"
+        android:visibility="gone" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/check_weather_button"
