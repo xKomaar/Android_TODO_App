@@ -98,8 +98,20 @@ public class EditProfileActivity extends AppCompatActivity {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             if (imageBitmap != null) {
-                imageView.setImageBitmap(imageBitmap);
+                imageView.setImageBitmap(cropToSquare(imageBitmap));
             }
         }
+    }
+
+    private Bitmap cropToSquare(Bitmap bitmap) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+
+        int size = Math.min(width, height);
+
+        int left = (width - size) / 2;
+        int top = (height - size) / 2;
+
+        return Bitmap.createBitmap(bitmap, left, top, size, size);
     }
 }
