@@ -38,11 +38,15 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import pl.sm_projekt_aplikacjatodo.R;
+import pl.sm_projekt_aplikacjatodo.database.TaskRepository;
+import pl.sm_projekt_aplikacjatodo.model.ProfileWithTasks;
+import pl.sm_projekt_aplikacjatodo.model.Task;
 import pl.sm_projekt_aplikacjatodo.weatherApi.Weather;
 import pl.sm_projekt_aplikacjatodo.database.ProfileRepository;
 import pl.sm_projekt_aplikacjatodo.model.Profile;
@@ -72,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton addProfileButton = findViewById(R.id.add_profile_button);
         addProfileButton.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, NewProfileActivity.class);
+            showLoading(false);
             startActivity(intent);
         });
 
@@ -92,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         private TextView profileNameTextView;
         private ImageView profilePictureImageView;
         private ImageButton arrowButton;
+        private ImageButton deleteButton;
         private Profile profile;
         public ProfileHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.profile_list_item, parent, false));
@@ -101,16 +107,37 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, TaskListActivity.class);
                 intent.putExtra("profileId", profile.getProfileId());
                 intent.putExtra("profileName", profile.getName());
+                showLoading(false);
                 startActivity(intent);
             });
 
             profileNameTextView = itemView.findViewById(R.id.profile_name);
             profilePictureImageView = itemView.findViewById(R.id.profile_picture);
+
+            deleteButton = itemView.findViewById(R.id.delete_button);
+            deleteButton.setOnClickListener(view -> {
+                Executor executor = Executors.newSingleThreadExecutor();
+
+                executor.execute(() -> {
+                    ProfileWithTasks profileWithTasks = profileRepository.findProfileWithTasksByProfileId(profile.getProfileId());
+                    TaskRepository taskRepository = new TaskRepository(getApplication());
+
+                    for (Task task : profileWithTasks.getTaskList()) {
+                        taskRepository.delete(task);
+                    }
+
+                    profileRepository.delete(profile);
+                });
+            });
         }
 
         public void bind(Profile profile) {
             this.profile = profile;
-            profileNameTextView.setText(profile.getName());
+            if(profile.getName().length() > 15) {
+                profileNameTextView.setText(profile.getName().substring(0, 16) + "...");
+            } else {
+                profileNameTextView.setText(profile.getName());
+            }
             if(profile.getProfilePicture() == null) {
                 profilePictureImageView.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.mipmap.ic_blank_profile_foreground));
             } else {
