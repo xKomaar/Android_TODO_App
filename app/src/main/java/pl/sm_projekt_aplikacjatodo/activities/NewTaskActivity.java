@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -38,11 +39,13 @@ public class NewTaskActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acticity_task_view);
+        setTitle(getString(R.string.new_task));
 
         titleEditText = findViewById(R.id.titleEditText);
         dateTextView = findViewById(R.id.dateTextView);
         descriptionEditText = findViewById(R.id.descriptionEditText);
         isDoneCheckBox = findViewById(R.id.isDoneCheckBox);
+        isDoneCheckBox.setVisibility(View.GONE);
         notifyCheckBox = findViewById(R.id.notifyCheckBox);
         saveButton = findViewById(R.id.button_save);
 

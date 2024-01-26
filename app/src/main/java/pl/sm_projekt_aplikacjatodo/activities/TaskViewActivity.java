@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.time.ZoneId;
@@ -52,6 +55,7 @@ public class TaskViewActivity extends AppCompatActivity {
             }
 
             titleEditText.setText(this.task.getTitle());
+            setTitle(this.task.getTitle());
 
             DatePickerDialog.OnDateSetListener date = (view, year, month, day) -> {
                 calendar.set(Calendar.YEAR, year);
@@ -92,5 +96,21 @@ public class TaskViewActivity extends AppCompatActivity {
                 }
             });
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        this.menu = menu;
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.task_view_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.return_button) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
