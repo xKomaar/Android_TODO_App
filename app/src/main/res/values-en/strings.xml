@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SM_Projekt_AplikacjaTODO</string>
+    <string name="new_profile">Create new profile</string>
+    <string name="profiles">Profiles</string>
+    <string name="profile">Profile</string>
+    <string name="profile_name">Profile name</string>
+    <string name="change_photo">Change photo</string>
+    <string name="create_profil_title">Create profile</string>
+    <string name="return_button">Return</string>
+    <string name="save_button">Save</string>
+    <string name="add_button">Add</string>
+    <string name="emptyTitle">Task name cannot be empty</string>
+    <string name="emptyProfileName">Profile name cannot be empty</string>
+    <string name="emptyDate">Task date cannot be empty</string>
+    <string name="pickDate">Select date</string>
+    <string name="checkWeather">Check weather</string>
+    <string name="location_permission_denied">Location access denied</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="service_not_available">Service unavailable</string>
+    <string name="no_addresses_found">Cannot find address</string>
+    <string name="weather_download_fail">Failed to download weather information</string>
+    <string name="weather_popup_title">"Weather in %s: "</string>
+    <string name="temperature_label">Temperature: %d°C</string>
+    <string name="feels_like_temperature_label">Feel: %d°C</string>
+    <string name="humidity_label">Humidity: %d%%</string>
+    <string name="wind_speed_label">Wind speed: %.2f kph</string>
+    <string name="close_button_label">Close</string>
+    <string name="mark_task_as_done">Set as done</string>
+    <string name="notify_me">Notify me!</string>
+    <string name="new_task">Create task</string>
+    <string name="no_camera_found">No camera detected</string>
+    <string name="add_task_title_hint">Set title</string>
+    <string name="add_task_desc_hint">Set description</string>
+    <string name="geocoder_error">Geocoder error</string>
+</resources>

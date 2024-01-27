@@ -32,21 +32,24 @@
         android:id="@+id/loadingProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/add_profile_button"
-        android:layout_alignEnd="@+id/add_profile_button"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="141dp"
-        android:layout_marginBottom="-67dp"
+        android:layout_above="@+id/check_weather_button"
+        android:layout_alignStart="@+id/check_weather_button"
+        android:layout_marginStart="174dp"
+        android:layout_marginEnd="-103dp"
+        android:layout_marginBottom="-64dp"
         android:visibility="gone" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/check_weather_button"
+        style="@style/Widget.MaterialComponents.Button.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/checkWeather"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_margin="16dp"
-        style="@style/Widget.MaterialComponents.Button.Icon"
-        android:textColor="@android:color/white"/>
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/checkWeather"
+        android:textColor="@android:color/white" />
 </RelativeLayout>
