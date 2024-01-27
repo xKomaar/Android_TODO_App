@@ -91,19 +91,23 @@ public class TaskListActivity extends AppCompatActivity {
             popupMenu.setOnMenuItemClickListener(item -> {
                 if (item.getItemId() == R.id.sort_date_asc) {
                     tasks.sort(Comparator.comparing(Task::getDateTime));
-                    taskAdapter.setTasks(tasks);
+                    taskAdapter.tasks.sort(Comparator.comparing(Task::getDateTime));
+                    taskAdapter.notifyDataSetChanged();
                     return true;
                 } else if (item.getItemId() == R.id.sort_date_desc) {
                     tasks.sort(Comparator.comparing(Task::getDateTime).reversed());
-                    taskAdapter.setTasks(tasks);
+                    taskAdapter.tasks.sort(Comparator.comparing(Task::getDateTime).reversed());
+                    taskAdapter.notifyDataSetChanged();
                     return true;
                 } else if (item.getItemId() == R.id.sort_name_asc) {
                     tasks.sort(Comparator.comparing(Task::getTitle));
-                    taskAdapter.setTasks(tasks);
+                    taskAdapter.tasks.sort(Comparator.comparing(Task::getTitle));
+                    taskAdapter.notifyDataSetChanged();
                     return true;
                 } else if (item.getItemId() == R.id.sort_name_desc) {
                     tasks.sort(Comparator.comparing(Task::getTitle).reversed());
-                    taskAdapter.setTasks(tasks);
+                    taskAdapter.tasks.sort(Comparator.comparing(Task::getTitle).reversed());
+                    taskAdapter.notifyDataSetChanged();
                     return true;
                 } else {
                     return false;
