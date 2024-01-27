@@ -1,12 +1,12 @@
-package pl.sm_projekt_aplikacjatodo;
+package pl.sm_projekt_aplikacjatodo.activities;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
+import pl.sm_projekt_aplikacjatodo.R;
 import pl.sm_projekt_aplikacjatodo.database.TaskRepository;
 import pl.sm_projekt_aplikacjatodo.model.Task;
 
@@ -38,11 +39,13 @@ public class NewTaskActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acticity_task_view);
+        setTitle(getString(R.string.new_task));
 
         titleEditText = findViewById(R.id.titleEditText);
         dateTextView = findViewById(R.id.dateTextView);
         descriptionEditText = findViewById(R.id.descriptionEditText);
         isDoneCheckBox = findViewById(R.id.isDoneCheckBox);
+        isDoneCheckBox.setVisibility(View.GONE);
         notifyCheckBox = findViewById(R.id.notifyCheckBox);
         saveButton = findViewById(R.id.button_save);
 

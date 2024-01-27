@@ -1,4 +1,4 @@
-package pl.sm_projekt_aplikacjatodo;
+package pl.sm_projekt_aplikacjatodo.activities;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -16,13 +16,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.Locale;
 
+import pl.sm_projekt_aplikacjatodo.R;
 import pl.sm_projekt_aplikacjatodo.database.TaskRepository;
 import pl.sm_projekt_aplikacjatodo.model.Task;
 
@@ -58,6 +55,7 @@ public class TaskViewActivity extends AppCompatActivity {
             }
 
             titleEditText.setText(this.task.getTitle());
+            setTitle(this.task.getTitle());
 
             DatePickerDialog.OnDateSetListener date = (view, year, month, day) -> {
                 calendar.set(Calendar.YEAR, year);
@@ -98,5 +96,21 @@ public class TaskViewActivity extends AppCompatActivity {
                 }
             });
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        this.menu = menu;
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.task_view_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.return_button) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

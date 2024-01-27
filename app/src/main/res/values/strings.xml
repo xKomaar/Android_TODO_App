@@ -9,16 +9,32 @@
     <string name="stworz_profil">Stwórz profil</string>
     <string name="return_button">Powrót</string>
     <string name="save_button">Zapisz</string>
+    <string name="add_button">Dodaj</string>
     <string name="title_activity_card_view">CardViewActivity</string>
     <string name="emptyTitle">Nazwa zadania nie może być pusta</string>
     <string name="emptyProfileName">Nazwa profilu nie może być pusta</string>
     <string name="emptyDate">Data zadania nie może być pusta</string>
     <string name="pickDate">Wybierz datę</string>
+    <string name="checkWeather">Sprawdź pogodę</string>
+    <string name="location_permission_denied">Odmowa dostępu do lokalizacji</string>
 
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="edit_profile">Edytuj profil</string>
+    <string name="service_not_available">Serwis niedostępny</string>
+    <string name="no_addresses_found">Brak znalezionego adresu</string>
+    <string name="weather_download_fail">Nie udało się pobrać pogody</string>
 
+    <!-- Weather popup -->
+    <string name="weather_popup_title">Pogoda w %s:</string>
+    <string name="temperature_label">Temperatura:</string>
+    <string name="feels_like_temperature_label">Odczuwalna temperatura:</string>
+    <string name="humidity_label">Wilgotność:</string>
+    <string name="wind_speed_label">Prędkość wiatru:</string>
+    <string name="close_button_label">Zamknij</string>
+    <string name="mark_task_as_done">Oznacz jako wykonane</string>
+    <string name="notify_me">Powiadom mnie!</string>
+    <string name="new_task">Utwórz Zadanie</string>
 </resources>

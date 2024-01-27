@@ -4,9 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".activities.MainActivity"
+    android:id="@+id/main_view" >
 
-    <!-- RecyclerView dla listy profili -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/profileRecyclerView"
         android:layout_width="match_parent"
@@ -15,6 +16,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:clipToPadding="false"
         tools:listitem="@layout/profile_list_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -25,4 +27,26 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
         android:src="@drawable/baseline_add_24"/>
+
+    <ProgressBar
+        android:id="@+id/loadingProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/add_profile_button"
+        android:layout_alignEnd="@+id/add_profile_button"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="141dp"
+        android:layout_marginBottom="-67dp"
+        android:visibility="gone" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/check_weather_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/checkWeather"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="16dp"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:textColor="@android:color/white"/>
 </RelativeLayout>

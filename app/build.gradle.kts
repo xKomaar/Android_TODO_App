@@ -59,7 +59,12 @@ dependencies {
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.3.0-rc01")
 
-//    Dependencies do działania API
-    implementation ("com.fasterxml.jackson.core:jackson-databind:2.12.5")
+    //Dependencies do działania API
+    implementation("com.squareup.retrofit2:retrofit:2.6.2")
+    implementation("com.squareup.retrofit2:converter-gson:2.6.2")
+    implementation("com.google.android.material:material:1.8.0-alpha03")
+    implementation("com.squareup.okhttp3:logging-interceptor:3.10.0")
 
+    //lokalizacja
+    implementation ("com.google.android.gms:play-services-location:21.0.1")
 }
