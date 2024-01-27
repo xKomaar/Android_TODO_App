@@ -36,4 +36,8 @@
     <string name="confirmation_message">Do you want to delete profile %s?</string>
     <string name="yes">Yes</string>
     <string name="No">No</string>
+    <string name="sort_by_date_asc">Date: From Earliest</string>
+    <string name="sort_by_date_desc">Date: From Latest</string>
+    <string name="sort_by_name_asc">Name: From \"A\" to \"Z\"</string>
+    <string name="sort_by_name_desc">Name: From \"Z\" to \"A\"</string>
 </resources>

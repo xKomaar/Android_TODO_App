@@ -42,4 +42,8 @@
     <string name="confirmation_message">Czy na pewno chcesz usunąć profil %s?</string>
     <string name="yes">Tak</string>
     <string name="No">Nie</string>
+    <string name="sort_by_date_asc">Data: Od Najwcześniejszej</string>
+    <string name="sort_by_date_desc">Data: Od Najpóźniejszej</string>
+    <string name="sort_by_name_asc">Nazwa: Od \"A\" do \"Z\"</string>
+    <string name="sort_by_name_desc">Nazwa: Od \"Z\" do \"A\"</string>
 </resources>

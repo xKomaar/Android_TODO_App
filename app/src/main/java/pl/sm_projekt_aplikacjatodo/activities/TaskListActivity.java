@@ -22,6 +22,8 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -82,22 +84,24 @@ public class TaskListActivity extends AppCompatActivity {
             inflater.inflate(R.menu.task_list_filter_menu, popupMenu.getMenu());
 
             popupMenu.setOnMenuItemClickListener(item -> {
-                // Handle filter options
-                switch (item.getItemId()) {
-                    case 1: //Sort by Date (ASC)
-                        // Implement sorting by date ascending
-                        return true;
-                    case 2: //Sort by Date (DESC)
-                        // Implement sorting by date descending
-                        return true;
-                    case 3: //Sort by Name (ASC)
-                        // Implement sorting by name ascending
-                        return true;
-                    case 4: //Sort by Name (DESC)
-                        // Implement sorting by name descending
-                        return true;
-                    default:
-                        return false;
+                if (item.getItemId() == R.id.sort_date_asc) {
+                    tasks.sort(Comparator.comparing(Task::getDateTime));
+                    taskAdapter.setTasks(tasks);
+                    return true;
+                } else if (item.getItemId() == R.id.sort_date_desc) {
+                    tasks.sort(Comparator.comparing(Task::getDateTime).reversed());
+                    taskAdapter.setTasks(tasks);
+                    return true;
+                } else if (item.getItemId() == R.id.sort_name_asc) {
+                    tasks.sort(Comparator.comparing(Task::getTitle));
+                    taskAdapter.setTasks(tasks);
+                    return true;
+                } else if (item.getItemId() == R.id.sort_name_desc) {
+                    tasks.sort(Comparator.comparing(Task::getTitle).reversed());
+                    taskAdapter.setTasks(tasks);
+                    return true;
+                } else {
+                    return false;
                 }
             });
 

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/action_sort_date_asc"
-        android:title="Sort by Date (ASC)"
+        android:id="@+id/sort_date_asc"
+        android:title="@string/sort_by_date_asc"
         android:numericShortcut="1"/>
     <item
-        android:id="@+id/action_sort_date_desc"
-        android:title="Sort by Date (DESC)"
+        android:id="@+id/sort_date_desc"
+        android:title="@string/sort_by_date_desc"
         android:numericShortcut="2"/>
     <item
-        android:id="@+id/action_sort_name_asc"
-        android:title="Sort by Name (ASC)"
+        android:id="@+id/sort_name_asc"
+        android:title="@string/sort_by_name_asc"
         android:numericShortcut="3"/>
     <item
-        android:id="@+id/action_sort_name_desc"
-        android:title="Sort by Name (DESC)"
+        android:id="@+id/sort_name_desc"
+        android:title="@string/sort_by_name_desc"
         android:numericShortcut="4"/>
 </menu>
