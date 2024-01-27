@@ -3,6 +3,7 @@ package pl.sm_projekt_aplikacjatodo.activities;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -19,6 +20,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.ByteArrayOutputStream;
 
 import pl.sm_projekt_aplikacjatodo.R;
 import pl.sm_projekt_aplikacjatodo.database.ProfileRepository;
@@ -51,8 +54,15 @@ public class EditProfileActivity extends AppCompatActivity {
                         profile = dbProfile;
                     }
 
-                    profileNameTextField.setText(profile.getName());
-                    imageView.setImageBitmap(profile.getBitmapProfilePicture());
+                    if (savedInstanceState != null) {
+                        profileNameTextField.setText(savedInstanceState.getString("nameField"));
+                        byte[] photoByteArray = savedInstanceState.getByteArray("photoByteArray");
+                        imageView.setImageBitmap(BitmapFactory.decodeByteArray(photoByteArray, 0, photoByteArray.length));
+                    } else {
+                        profileNameTextField.setText(profile.getName());
+                        imageView.setImageBitmap(profile.getBitmapProfilePicture());
+                    }
+
                     changePhotoButton.setOnClickListener(e -> dispatchTakePictureIntent());
 
                     saveProfileButton.setOnClickListener(e -> {
@@ -111,6 +121,16 @@ public class EditProfileActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT)
                     .show();
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("nameField", profileNameTextField.getText().toString());
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ((BitmapDrawable)imageView.getDrawable()).getBitmap().compress(Bitmap.CompressFormat.PNG, 100, bos);
+        outState.putByteArray("photoByteArray", bos.toByteArray());
     }
 
     private Bitmap cropToSquare(Bitmap bitmap) {

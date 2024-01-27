@@ -89,3 +89,5 @@ z
 Japp/src/main/java/pl/sm_projekt_aplikacjatodo/database/TaskRepository.java,d\d\ddf86c171c7d7e8b04628091e4ad2575c3840642
 ~
 Napp/src/main/java/pl/sm_projekt_aplikacjatodo/activities/TaskViewActivity.java,7\a\7a72cb5c5d65d231ac48488cd58528cd7ccef919
+m
+=app/src/main/java/pl/sm_projekt_aplikacjatodo/model/Task.java,1\3\131fb1650d7c43552cdd90ce39c9d6e29e46975a

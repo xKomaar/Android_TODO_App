@@ -1,8 +1,6 @@
 
 }
 java:S1450"[Remove the "dateTextView" field and declare it as a local variable in the relevant methods.(£ùôÈıÿÿÿÿ8ùÓ³¿Ô1
-„
-java:S1450 "bRemove the "descriptionEditText" field and declare it as a local variable in the relevant methods.(äš§Öûÿÿÿÿ8ùÓ³¿Ô1
 z
 java:S1450!"]Remove the "isDoneCheckBox" field and declare it as a local variable in the relevant methods.(šºà§8úÓ³¿Ô1
 p
@@ -11,9 +9,7 @@ java:S1450%"SRemove the "menu" field and declare it as a local variable in the 
 java:S1450""]Remove the "notifyCheckBox" field and declare it as a local variable in the relevant methods.(Ë‚ïÿÿÿÿÿ8ü´¿Ô1
 {
 java:S1450#"YRemove the "saveButton" field and declare it as a local variable in the relevant methods.(Éÿ¤ûÿÿÿÿ8úÓ³¿Ô1
-p
-java:S1450$"SRemove the "task" field and declare it as a local variable in the relevant methods.(³´Û¸8úÓ³¿Ô1
 
 java:S1450"]Remove the "taskRepository" field and declare it as a local variable in the relevant methods.(ŞÔîıøÿÿÿÿ8úÓ³¿Ô1
-y
-java:S1450"\Remove the "titleEditText" field and declare it as a local variable in the relevant methods.(Ïø’8úÓ³¿Ô1
+R
+java:S18747"5Remove this use of "getParcelable"; it is deprecated.(‰âûÂ8‹ £ßÔ1

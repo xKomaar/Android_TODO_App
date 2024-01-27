@@ -1,9 +1,13 @@
 
 l
-java:S1192;"JDefine a constant instead of duplicating this literal "profileId" 4 times.(ÙÎØÿÿÿÿÿ8â—óİÔ1
+java:S1192<"JDefine a constant instead of duplicating this literal "profileId" 4 times.(ÙÎØÿÿÿÿÿ8â—óİÔ1
+h
+java:S1192v"FDefine a constant instead of duplicating this literal "tasks" 3 times.(…º˜óüÿÿÿÿ8İÀ£ŞÔ1
 p
-java:S1450)"SRemove the "menu" field and declare it as a local variable in the relevant methods.(î·öÁ8™˜óİÔ1
+java:S1450*"SRemove the "menu" field and declare it as a local variable in the relevant methods.(î·öÁ8™˜óİÔ1
+`
+java:S1874w">Remove this use of "getParcelableArrayList"; it is deprecated.(çÚŒÛüÿÿÿÿ8ô´¡ŞÔ1
 a
-java:S1874á">Remove this use of "startActivityForResult"; it is deprecated.(ëÇÍáøÿÿÿÿ8´˜óİÔ1
+java:S1874è">Remove this use of "startActivityForResult"; it is deprecated.(ëÇÍáøÿÿÿÿ8´˜óİÔ1
 g
-java:S1874ç"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(¹Î¾8µ˜óİÔ1
+java:S1874î"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(¹Î¾8µ˜óİÔ1

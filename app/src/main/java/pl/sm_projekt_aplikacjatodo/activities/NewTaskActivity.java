@@ -51,7 +51,11 @@ public class NewTaskActivity extends AppCompatActivity {
 
         taskRepository = new TaskRepository(this.getApplication());
 
-        task = new Task();
+        if(savedInstanceState != null) {
+            task = savedInstanceState.getParcelable("task");
+        } else {
+            task = new Task();
+        }
 
         DatePickerDialog.OnDateSetListener date = (view, year, month, day) -> {
             calendar.set(Calendar.YEAR, year);
@@ -70,7 +74,13 @@ public class NewTaskActivity extends AppCompatActivity {
                         .show();
             }
         });
-        dateTextView.setText(getString(R.string.pickDate));
+
+        if (task.getDateTime() == null) {
+            dateTextView.setText(getString(R.string.pickDate));
+        } else {
+            dateTextView.setText(task.getDateTime());
+        }
+
 
         notifyCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> task.setNotify(isChecked));
 
@@ -92,7 +102,6 @@ public class NewTaskActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     @Override
@@ -109,5 +118,13 @@ public class NewTaskActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        task.setTitle(titleEditText.getText().toString());
+        task.setDescription(descriptionEditText.getText().toString());
+        outState.putParcelable("task", task);
     }
 }

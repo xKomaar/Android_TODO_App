@@ -1,5 +1,9 @@
 package pl.sm_projekt_aplikacjatodo.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -8,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 @Entity
-public class Task {
+public class Task implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     private Integer taskId;
     private String title;
@@ -93,5 +97,16 @@ public class Task {
 
     public void setDone(boolean done) {
         this.done = done;
+    }
+
+    //metody implementujące Parcable (po to, zeby w liscie tasków móc zapisać instance)
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+
     }
 }

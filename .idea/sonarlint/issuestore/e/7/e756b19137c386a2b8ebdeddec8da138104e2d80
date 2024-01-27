@@ -1,15 +1,13 @@
 
 
-java:S1450"`Remove the "changePhotoButton" field and declare it as a local variable in the relevant methods.(งฯญüÿÿÿÿ8ปรนิ1
+java:S1450""`Remove the "changePhotoButton" field and declare it as a local variable in the relevant methods.(งฯญüÿÿÿÿ8๚ิÞิ1
 
-java:S1450"bRemove the "createProfileButton" field and declare it as a local variable in the relevant methods.(ูคÞถ8ปรนิ1
-…
-java:S1450 "cRemove the "profileNameTextField" field and declare it as a local variable in the relevant methods.(ชÞนýÿÿÿÿ8ปรนิ1
+java:S1450#"bRemove the "createProfileButton" field and declare it as a local variable in the relevant methods.(ูคÞถ8๚ิÞิ1
 }
-java:S1450""`Remove the "profileRepository" field and declare it as a local variable in the relevant methods.(ต๑หฑ8ปรนิ1
+java:S1450&"`Remove the "profileRepository" field and declare it as a local variable in the relevant methods.(ต๑หฑ8๚ิÞิ1
 [
-java:S1874T">Remove this use of "startActivityForResult"; it is deprecated.(คüฉย8–ปรนิ1
+java:S1874^">Remove this use of "startActivityForResult"; it is deprecated.(คüฉย8—๚ิÞิ1
 f
-java:S1874Y"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(นฮพ8–ปรนิ1
+java:S1874c"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(นฮพ8๚ิÞิ1
 G
-java:S1874]"+Remove this use of "get"; it is deprecated.(ถ๕์>8–ปรนิ1
+java:S1874g"+Remove this use of "get"; it is deprecated.(ถ๕์>8๚ิÞิ1

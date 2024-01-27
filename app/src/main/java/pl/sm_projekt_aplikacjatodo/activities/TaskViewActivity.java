@@ -2,6 +2,8 @@ package pl.sm_projekt_aplikacjatodo.activities;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.ByteArrayOutputStream;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
@@ -50,12 +53,14 @@ public class TaskViewActivity extends AppCompatActivity {
         Intent intent = getIntent();
         taskRepository = new TaskRepository(this.getApplication());
         taskRepository.findTaskByTaskId(intent.getIntExtra("taskId", -1)).observe(this, task -> {
-            if(task != null) {
+            if(savedInstanceState != null) {
+                this.task = savedInstanceState.getParcelable("task");
+            } else if(task != null) {
                 this.task = task;
             }
 
             titleEditText.setText(this.task.getTitle());
-            setTitle(this.task.getTitle());
+            setTitle(task.getTitle());
 
             DatePickerDialog.OnDateSetListener date = (view, year, month, day) -> {
                 calendar.set(Calendar.YEAR, year);
@@ -112,5 +117,13 @@ public class TaskViewActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        this.task.setTitle(titleEditText.getText().toString());
+        this.task.setDescription(descriptionEditText.getText().toString());
+        outState.putParcelable("task", this.task);
     }
 }

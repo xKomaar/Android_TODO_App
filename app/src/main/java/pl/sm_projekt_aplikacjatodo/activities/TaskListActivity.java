@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -113,10 +114,16 @@ public class TaskListActivity extends AppCompatActivity {
         });
 
         taskRepository = new TaskRepository(this.getApplication());
-        taskRepository.findAllByTaskOwnerId(getIntent().getIntExtra("profileId", -1)).observe(this, taskList -> {
-            this.tasks = taskList;
-            taskAdapter.setTasks(taskList);
-        });
+
+        if (savedInstanceState != null && savedInstanceState.containsKey("tasks")) {
+            tasks = savedInstanceState.getParcelableArrayList("tasks");
+            taskAdapter.setTasks(tasks);
+        } else {
+            taskRepository.findAllByTaskOwnerId(getIntent().getIntExtra("profileId", -1)).observe(this, taskList -> {
+                this.tasks = taskList;
+                taskAdapter.setTasks(taskList);
+            });
+        }
     }
 
     private class TaskHolder extends RecyclerView.ViewHolder{
@@ -235,6 +242,14 @@ public class TaskListActivity extends AppCompatActivity {
             if (updatedProfileName != null) {
                 this.setTitle(updatedProfileName);
             }
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (tasks != null) {
+            outState.putParcelableArrayList("tasks", new ArrayList<>(tasks));
         }
     }
 }

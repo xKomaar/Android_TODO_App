@@ -1,3 +1,9 @@
 
+‚
+java:S1450 "`Remove the "changePhotoButton" field and declare it as a local variable in the relevant methods.(ƒ§Ï­üÿÿÿÿ8Ì¯ÖÞÔ1
+}
+java:S1450$"`Remove the "profileRepository" field and declare it as a local variable in the relevant methods.(µñË±8Ì¯ÖÞÔ1
+‚
+java:S1450!"`Remove the "saveProfileButton" field and declare it as a local variable in the relevant methods.(¼öüÃøÿÿÿÿ8Í¯ÖÞÔ1
 G
-java:S1874O"+Remove this use of "get"; it is deprecated.(¶õì>8ÖØÔÔ1
+java:S1874Y"+Remove this use of "get"; it is deprecated.(¶õì>8ÖØÔÔ1
