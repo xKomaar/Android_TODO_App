@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
@@ -25,16 +27,18 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 import pl.sm_projekt_aplikacjatodo.R;
 import pl.sm_projekt_aplikacjatodo.database.TaskRepository;
+import pl.sm_projekt_aplikacjatodo.model.ProfileWithTasks;
 import pl.sm_projekt_aplikacjatodo.model.Task;
 
 public class TaskListActivity extends AppCompatActivity {
     private TaskRepository taskRepository;
     private Menu menu;
-
     private List<Task> tasks;
 
     @Override
@@ -119,6 +123,7 @@ public class TaskListActivity extends AppCompatActivity {
         private TextView taskTitleTextView;
         private TextView taskDateTextView;
         private CheckBox isDoneCheckBox;
+        private ImageButton deleteTaskButton;
         private Task task;
 
         public TaskHolder(LayoutInflater inflater, ViewGroup parent) {
@@ -133,9 +138,31 @@ public class TaskListActivity extends AppCompatActivity {
                 intent.putExtra("taskId", task.getTaskId());
                 startActivity(intent);
             });
+
+            deleteTaskButton = itemView.findViewById(R.id.delete_button);
+            deleteTaskButton.setOnClickListener(view -> showDeleteConfirmationDialog());
         }
 
-        public void bind(Task task) { //Bindowanie danych
+        private void showDeleteConfirmationDialog() {
+            Dialog deleteConfirmationDialog = new Dialog(TaskListActivity.this);
+            deleteConfirmationDialog.setContentView(R.layout.delete_confirmation_dialog);
+
+            TextView confirmationMessage = deleteConfirmationDialog.findViewById(R.id.confirmation_message);
+            confirmationMessage.setText(getString(R.string.confirmation_message, task.getTitle()));
+
+            Button buttonYes = deleteConfirmationDialog.findViewById(R.id.button_yes);
+            buttonYes.setOnClickListener(v -> {
+                taskRepository.delete(task);
+                deleteConfirmationDialog.dismiss();
+            });
+
+            Button buttonNo = deleteConfirmationDialog.findViewById(R.id.button_no);
+            buttonNo.setOnClickListener(v -> deleteConfirmationDialog.dismiss());
+
+            deleteConfirmationDialog.show();
+        }
+
+        public void bind(Task task) {
             this.task = task;
             this.taskTitleTextView.setText(task.getTitle());
             this.taskDateTextView.setText(task.getDateTime());

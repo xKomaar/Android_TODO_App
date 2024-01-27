@@ -85,3 +85,7 @@ w
 G.idea/sonarlint/issuestore/1/b/1bf87a66012296d696fd2930fdd10e8fe0d7067a,9\0\90d0d2e250faecc23fd0367990c826490261f5a0
 Å
 Q.idea/sonarlint/securityhotspotstore/f/f/fffc3ee66cb5c30f761146c628ca96986d915dc1,6\8\685ab0ff5a4e7a8978c0ce382fe060affeb6e8f6
+z
+Japp/src/main/java/pl/sm_projekt_aplikacjatodo/database/TaskRepository.java,d\d\ddf86c171c7d7e8b04628091e4ad2575c3840642
+~
+Napp/src/main/java/pl/sm_projekt_aplikacjatodo/activities/TaskViewActivity.java,7\a\7a72cb5c5d65d231ac48488cd58528cd7ccef919
