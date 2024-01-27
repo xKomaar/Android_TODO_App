@@ -16,7 +16,6 @@
     <string name="pickDate">Wybierz datę</string>
     <string name="checkWeather">Sprawdź pogodę</string>
     <string name="location_permission_denied">Odmowa dostępu do lokalizacji</string>
-
     <string name="first_fragment_label" translatable="false">First Fragment</string>
     <string name="second_fragment_label" translatable="false">Second Fragment</string>
     <string name="next" translatable="false">Next</string>
@@ -25,8 +24,6 @@
     <string name="service_not_available">Serwis niedostępny</string>
     <string name="no_addresses_found">Brak znalezionego adresu</string>
     <string name="weather_download_fail">Nie udało się pobrać pogody</string>
-
-    <!-- Weather popup -->
     <string name="weather_popup_title">"Pogoda w %s: "</string>
     <string name="temperature_label">Temperatura: %d°C</string>
     <string name="feels_like_temperature_label">Odczuwalna temperatura: %d°C</string>
@@ -40,4 +37,9 @@
     <string name="add_task_title_hint">Podaj tytuł zadania</string>
     <string name="add_task_desc_hint">Dodaj opis</string>
     <string name="geocoder_error">Błąd Geocodera</string>
+
+
+    <string name="confirmation_message">Czy na pewno chcesz usunąć profil %s?</string>
+    <string name="yes">Tak</string>
+    <string name="No">Nie</string>
 </resources>

@@ -1,7 +1,9 @@
 
+F
+java:S5411Ñ"(Use a primitive boolean expression here.(ò­ƒÔ8‰½âÙÔ1
 s
-java:S3252í"PUse static access with "android.view.ViewGroup$LayoutParams" for "MATCH_PARENT".(ÒÖœªşÿÿÿÿ8Œòú×Ô1
+java:S3252ÿ"PUse static access with "android.view.ViewGroup$LayoutParams" for "MATCH_PARENT".(ÒÖœªşÿÿÿÿ8€»»ÙÔ1
 n
-java:S3252î"PUse static access with "android.view.ViewGroup$LayoutParams" for "WRAP_CONTENT".(ØªØ8¼¸Ö×Ô1
+java:S3252€"PUse static access with "android.view.ViewGroup$LayoutParams" for "WRAP_CONTENT".(ØªØ8Ù½âÙÔ1
 U
-java:S1874"7Remove this use of "getFromLocation"; it is deprecated.(û¨Ü8Â¸Ö×Ô1
+java:S1874Ÿ"7Remove this use of "getFromLocation"; it is deprecated.(û¨Ü8İ½âÙÔ1

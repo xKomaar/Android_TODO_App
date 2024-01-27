@@ -122,9 +122,18 @@ public class MainActivity extends AppCompatActivity {
             profilePictureImageView = itemView.findViewById(R.id.profile_picture);
 
             deleteButton = itemView.findViewById(R.id.delete_button);
-            deleteButton.setOnClickListener(view -> {
-                Executor executor = Executors.newSingleThreadExecutor();
+            deleteButton.setOnClickListener(view -> showDeleteConfirmationDialog());
+        }
+        private void showDeleteConfirmationDialog() {
+            Dialog deleteConfirmationDialog = new Dialog(MainActivity.this);
+            deleteConfirmationDialog.setContentView(R.layout.delete_confirmation_dialog);
 
+            TextView confirmationMessage = deleteConfirmationDialog.findViewById(R.id.confirmation_message);
+            confirmationMessage.setText(getString(R.string.confirmation_message, profile.getName()));
+
+            Button buttonYes = deleteConfirmationDialog.findViewById(R.id.button_yes);
+            buttonYes.setOnClickListener(v -> {
+                Executor executor = Executors.newSingleThreadExecutor();
                 executor.execute(() -> {
                     ProfileWithTasks profileWithTasks = profileRepository.findProfileWithTasksByProfileId(profile.getProfileId());
                     TaskRepository taskRepository = new TaskRepository(getApplication());
@@ -135,7 +144,13 @@ public class MainActivity extends AppCompatActivity {
 
                     profileRepository.delete(profile);
                 });
+                deleteConfirmationDialog.dismiss();
             });
+
+            Button buttonNo = deleteConfirmationDialog.findViewById(R.id.button_no);
+            buttonNo.setOnClickListener(v -> deleteConfirmationDialog.dismiss());
+
+            deleteConfirmationDialog.show();
         }
 
         public void bind(Profile profile) {
