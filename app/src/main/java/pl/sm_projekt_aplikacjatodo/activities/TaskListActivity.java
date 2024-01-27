@@ -74,7 +74,7 @@ public class TaskListActivity extends AppCompatActivity {
             });
         }
 
-        public void bind(Task task) {
+        public void bind(Task task) { //Bindowanie danych
             this.task = task;
             this.taskTitleTextView.setText(task.getTitle());
             this.taskDateTextView.setText(task.getDateTime());
