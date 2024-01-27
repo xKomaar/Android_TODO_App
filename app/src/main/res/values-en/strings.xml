@@ -41,4 +41,7 @@
     <string name="sort_by_name_asc">Name: From \"A\" to \"Z\"</string>
     <string name="sort_by_name_desc">Name: From \"Z\" to \"A\"</string>
     <string name="is_done">Done?</string>
+    <string name="title_label">Task Name</string>
+    <string name="date_label">Date</string>
+    <string name="description_label">Description</string>
 </resources>

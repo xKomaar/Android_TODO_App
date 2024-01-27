@@ -47,4 +47,7 @@
     <string name="sort_by_name_asc">Nazwa: Od \"A\" do \"Z\"</string>
     <string name="sort_by_name_desc">Nazwa: Od \"Z\" do \"A\"</string>
     <string name="is_done">Wykonany?</string>
+    <string name="title_label">Nazwa Zadania</string>
+    <string name="date_label">Data</string>
+    <string name="description_label">Opis</string>
 </resources>
