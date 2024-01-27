@@ -105,7 +105,7 @@ public class TaskListActivity extends AppCompatActivity {
             }
         }
 
-        @Override
+        @Override // zliczanie taskow
         public int getItemCount() {
             if(tasks != null) {
                 return tasks.size();
