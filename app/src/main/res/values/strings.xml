@@ -29,12 +29,16 @@
 
     <!-- Weather popup -->
     <string name="weather_popup_title">Pogoda w %s:</string>
-    <string name="temperature_label">Temperatura:</string>
-    <string name="feels_like_temperature_label">Odczuwalna temperatura:</string>
-    <string name="humidity_label">Wilgotność:</string>
-    <string name="wind_speed_label">Prędkość wiatru:</string>
+    <string name="temperature_label">Temperatura: %d°C</string>
+    <string name="feels_like_temperature_label">Odczuwalna temperatura: %d°C</string>
+    <string name="humidity_label">Wilgotność: %d%%</string>
+    <string name="wind_speed_label">Prędkość wiatru: %.2f km/h</string>
     <string name="close_button_label">Zamknij</string>
     <string name="mark_task_as_done">Oznacz jako wykonane</string>
     <string name="notify_me">Powiadom mnie!</string>
     <string name="new_task">Utwórz Zadanie</string>
+    <string name="no_camera_found">Nie wykryto żadnego aparatu</string>
+    <string name="add_task_title_hint">Podaj tytuł zadania</string>
+    <string name="add_task_desc_hint">Dodaj opis</string>
+    <string name="geocoder_error">Geocoder Error</string>
 </resources>

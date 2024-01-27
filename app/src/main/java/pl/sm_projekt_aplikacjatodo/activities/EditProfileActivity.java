@@ -1,5 +1,6 @@
 package pl.sm_projekt_aplikacjatodo.activities;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -13,6 +14,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,53 +25,66 @@ import pl.sm_projekt_aplikacjatodo.database.ProfileRepository;
 import pl.sm_projekt_aplikacjatodo.model.Profile;
 
 public class EditProfileActivity extends AppCompatActivity {
-
-
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
     private ImageView imageView;
     private Button changePhotoButton;
     private Button saveProfileButton;
     private EditText profileNameTextField;
-    Profile profile;
+    private ActivityResultLauncher<Intent> photoIntentLauncher;
     private ProfileRepository profileRepository;
+    private Profile profile;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.setTitle(getString(R.string.edit_profile));
+        setTitle(getString(R.string.edit_profile));
         setContentView(R.layout.activity_edit_profile);
 
         profileNameTextField = findViewById(R.id.profile_name);
         imageView = findViewById(R.id.profile_image);
         changePhotoButton = findViewById(R.id.change_profile_image);
         saveProfileButton = findViewById(R.id.create_new_profile);
+        profileRepository = new ProfileRepository(getApplication());
+        profileRepository.findProfileByProfileId(getIntent()
+                        .getIntExtra("profileId", -1))
+                .observe(this, dbProfile -> {
+                    if (dbProfile != null) {
+                        profile = dbProfile;
+                    }
 
-        profileRepository = new ProfileRepository(this.getApplication());
-        profileRepository.findProfileByProfileId(getIntent().getIntExtra("profileId", -1)).observe(this, profile -> {
-            if(profile != null) {
-                this.profile = profile;
-            }
-            profileNameTextField.setText(this.profile.getName());
+                    profileNameTextField.setText(profile.getName());
+                    imageView.setImageBitmap(profile.getBitmapProfilePicture());
+                    changePhotoButton.setOnClickListener(e -> dispatchTakePictureIntent());
 
-            imageView.setImageBitmap(this.profile.getBitmapProfilePicture());
+                    saveProfileButton.setOnClickListener(e -> {
+                        if (profileNameTextField.getText().length() > 0) {
+                            profile.setProfilePicture(((BitmapDrawable) imageView.getDrawable()).getBitmap());
+                            profile.setName(profileNameTextField.getText().toString());
+                            profileRepository.update(profile);
+                            Intent resultIntent = new Intent(EditProfileActivity.this, TaskListActivity.class);
+                            resultIntent.putExtra("profileName", profile.getName());
+                            setResult(RESULT_OK, resultIntent);
+                            finish();
+                        } else {
+                            Toast.makeText(EditProfileActivity.this, getString(R.string.emptyProfileName),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                });
 
-            changePhotoButton.setOnClickListener(e -> dispatchTakePictureIntent());
-
-            saveProfileButton.setOnClickListener(e -> {
-                if(profileNameTextField.getText().length() > 0) {
-                    this.profile.setProfilePicture(((BitmapDrawable)imageView.getDrawable()).getBitmap());
-                    this.profile.setName(profileNameTextField.getText().toString());
-                    profileRepository.update(this.profile);
-                    Intent resultIntent = new Intent(EditProfileActivity.this, TaskListActivity.class);
-                    resultIntent.putExtra("profileName", this.profile.getName());
-                    setResult(RESULT_OK, resultIntent);
-                    finish();
-                } else {
-                    Toast.makeText(EditProfileActivity.this, getString(R.string.emptyProfileName),
-                            Toast.LENGTH_SHORT).show();
+        photoIntentLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == RESULT_OK
+                    && result.getData() != null
+                    && result.getData().getExtras() != null) {
+                Bundle extras = result.getData().getExtras();
+                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                if (imageBitmap != null) {
+                    imageView.setImageBitmap(cropToSquare(imageBitmap));
                 }
-            });
+            }
         });
     }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -86,20 +102,14 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-        }
-    }
+        try {
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            if (imageBitmap != null) {
-                imageView.setImageBitmap(cropToSquare(imageBitmap));
-            }
+            photoIntentLauncher.launch(takePictureIntent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(EditProfileActivity.this,
+                            getString(R.string.no_camera_found),
+                            Toast.LENGTH_SHORT)
+                    .show();
         }
     }
 

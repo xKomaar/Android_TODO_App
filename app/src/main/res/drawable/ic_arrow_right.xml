@@ -3,10 +3,10 @@
     android:height="20dp"
     android:viewportWidth="20.0"
     android:viewportHeight="20.0"
-    android:tint="?attr/colorControlNormal">
+    android:tint="#E9DCFE">
 
     <path
-        android:fillColor="#FF000000"
+        android:fillColor="#E9DCFE"
         android:pathData="M10 20A10 10 0 1 0 0 10a10 10 0 0 0 10 10zM8.711 4.3l5.7 5.766L8.7 15.711l-1.4-1.422 4.289-4.242-4.3-4.347z"/>
 
 </vector>

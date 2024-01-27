@@ -6,7 +6,7 @@ public class Weather {
     @SerializedName("temp")
     private int temperature;
     @SerializedName("feels_like")
-    private int feelsLikeTemeperature;
+    private int feelsLikeTemperature;
     @SerializedName("wind_speed")
     private double windSpeed;
     @SerializedName("humidity")
@@ -20,12 +20,12 @@ public class Weather {
         this.temperature = temperature;
     }
 
-    public int getFeelsLikeTemeperature() {
-        return feelsLikeTemeperature;
+    public int getFeelsLikeTemperature() {
+        return feelsLikeTemperature;
     }
 
-    public void setFeelsLikeTemeperature(int feelsLikeTemeperature) {
-        this.feelsLikeTemeperature = feelsLikeTemeperature;
+    public void setFeelsLikeTemperature(int feelsLikeTemperature) {
+        this.feelsLikeTemperature = feelsLikeTemperature;
     }
 
     public double getWindSpeed() {

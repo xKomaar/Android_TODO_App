@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="profile_launch_button_color">#6750A3</color>
+    <color name="profile_normal_color">#FDFDFD</color>
+    <color name="profile_greenish_color">#E3E8E3</color>
+    <color name="profile_purple_color">#FFEBD9F8</color>
 </resources>

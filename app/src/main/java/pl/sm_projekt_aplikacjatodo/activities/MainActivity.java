@@ -1,5 +1,8 @@
 package pl.sm_projekt_aplikacjatodo.activities;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -8,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.pm.PackageManager;
 import com.google.android.gms.location.LocationServices;
@@ -133,11 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
         public void bind(Profile profile) {
             this.profile = profile;
-            if(profile.getName().length() > 15) {
-                profileNameTextView.setText(profile.getName().substring(0, 16) + "...");
-            } else {
-                profileNameTextView.setText(profile.getName());
-            }
+            profileNameTextView.setText(profile.getName());
             if(profile.getProfilePicture() == null) {
                 profilePictureImageView.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.mipmap.ic_blank_profile_foreground));
             } else {
@@ -173,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
                 return 0;
             }
         }
+        @SuppressLint("NotifyDataSetChanged")
         void setProfiles(List<Profile> profilesWithTasks) {
             this.profilesWithTasks = profilesWithTasks;
             notifyDataSetChanged();
@@ -184,9 +185,18 @@ public class MainActivity extends AppCompatActivity {
         if(ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]
-                            {Manifest.permission.ACCESS_FINE_LOCATION},
-                    1);
+            ActivityResultLauncher<String> requestPermissionLauncher = registerForActivityResult(
+                    new ActivityResultContracts.RequestPermission(),
+                    permissionGranted -> {
+                        if(permissionGranted) {
+                            checkWeatherBasedOnCurrentLocation();
+                        } else {
+                            Toast.makeText(this, R.string.location_permission_denied,
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+            );
+            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION);
         } else {
             LocationServices.getFusedLocationProviderClient(this).getLastLocation().addOnSuccessListener(location -> {
                 if(location != null) {
@@ -195,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
                     Call<Weather> weatherApiCall = weatherService.getWeatherData(city.toLowerCase());
                     weatherApiCall.enqueue(new Callback<Weather>() {
                         @Override
-                        public void onResponse(Call<Weather> call, Response<Weather> response) {
+                        public void onResponse(@NonNull Call<Weather> call, @NonNull Response<Weather> response) {
                             if (response.body() != null) {
                                 Weather weather = response.body();
 
@@ -205,16 +215,16 @@ public class MainActivity extends AppCompatActivity {
                                 textViewCity.setText(getString(R.string.weather_popup_title, city));
 
                                 TextView textViewTemperature = popupView.findViewById(R.id.textViewTemperature);
-                                textViewTemperature.setText(getString(R.string.temperature_label) + " " + weather.getTemperature() + "°C");
+                                textViewTemperature.setText(getString(R.string.temperature_label, weather.getTemperature()));
 
                                 TextView textViewFeelsLikeTemperature = popupView.findViewById(R.id.textViewFeelsLikeTemperature);
-                                textViewFeelsLikeTemperature.setText(getString(R.string.feels_like_temperature_label) + " " + weather.getFeelsLikeTemeperature() + "°C");
+                                textViewFeelsLikeTemperature.setText(getString(R.string.feels_like_temperature_label, weather.getFeelsLikeTemperature()));
 
                                 TextView textViewHumidity = popupView.findViewById(R.id.textViewHumidity);
-                                textViewHumidity.setText(getString(R.string.humidity_label) + " " + weather.getHumidity() + "%");
+                                textViewHumidity.setText(getString(R.string.humidity_label, weather.getHumidity()));
 
                                 TextView textViewWindSpeed = popupView.findViewById(R.id.textViewWindSpeed);
-                                textViewWindSpeed.setText(getString(R.string.wind_speed_label) + " " +weather.getWindSpeed() + " km/h");
+                                textViewWindSpeed.setText(getString(R.string.wind_speed_label, weather.getWindSpeed()));
 
                                 Dialog popupDialog = new Dialog(MainActivity.this);
                                 popupDialog.setContentView(popupView);
@@ -233,33 +243,15 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                         @Override
-                        public void onFailure(Call<Weather> call, Throwable t) {
+                        public void onFailure(@NonNull Call<Weather> call, @NonNull Throwable t) {
                             Snackbar.make(findViewById(R.id.main_view),
                                     getString(R.string.weather_download_fail),
                                     BaseTransientBottomBar.LENGTH_LONG).show();
                             showLoading(false);
                         }
                     });
-                } else {
-
                 }
             });
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch(requestCode) {
-            case 1:
-                if(grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    checkWeatherBasedOnCurrentLocation();
-                } else {
-                    Toast.makeText(this, R.string.location_permission_denied,
-                            Toast.LENGTH_SHORT).show();
-                }
-                break;
         }
     }
 
@@ -280,13 +272,13 @@ public class MainActivity extends AppCompatActivity {
                             1);
                 } catch (IOException ioException) {
                     resultMessage = getApplicationContext().getString(R.string.service_not_available);
-                    Log.e("Geocoder Error", resultMessage, ioException);
+                    Log.e(getString(R.string.geocoder_error), resultMessage, ioException);
                 }
 
                 if(addressList == null || addressList.isEmpty()) {
                     if(resultMessage.isEmpty()) {
                         resultMessage = getApplicationContext().getString(R.string.no_addresses_found);
-                        Log.e("Geocoder Error", resultMessage);
+                        Log.e(getString(R.string.geocoder_error), resultMessage);
                     }
                 } else {
                     //wpisanie miasta jakos message
@@ -297,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 city = returnedCity.get();
             } catch (ExecutionException | InterruptedException e) {
-                Log.e("Geocoder Error", e.getMessage(), e);
+                Log.e(getString(R.string.geocoder_error), e.getMessage(), e);
                 Thread.currentThread().interrupt();
             }
         }
