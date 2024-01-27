@@ -3,6 +3,8 @@
     <string name="new_profile">Stwórz nowy profil</string>
     <string name="profiles">Profile</string>
     <string name="profile">Profil</string>
+    <string name="notification_title">Powiadomienie z profilu %s</string>
+    <string name="notification_body">Termin zadania %s mija jutro!</string>
     <string name="profile_name">Nazwa profilu</string>
     <string name="change_photo">Zmień zdjęcie</string>
     <string name="create_profil_title">Stwórz profil</string>

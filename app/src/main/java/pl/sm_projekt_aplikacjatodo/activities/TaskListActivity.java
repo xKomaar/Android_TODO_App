@@ -147,6 +147,7 @@ public class TaskListActivity extends AppCompatActivity {
             itemView.setOnClickListener(view -> {
                 Intent intent = new Intent(TaskListActivity.this, TaskViewActivity.class);
                 intent.putExtra("taskId", task.getTaskId());
+                intent.putExtra("profileName", getIntent().getStringExtra("profileName"));
                 startActivity(intent);
             });
 

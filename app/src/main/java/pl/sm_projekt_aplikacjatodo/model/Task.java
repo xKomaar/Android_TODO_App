@@ -18,7 +18,6 @@ public class Task implements Parcelable {
     private String title;
     private String description;
     private String dateTime;
-    private boolean notify;
     private boolean done;
     private Integer taskOwnerId;
 
@@ -26,11 +25,10 @@ public class Task implements Parcelable {
 
     }
 
-    public Task(String title, String description, String dateTime, boolean notify, boolean done, int taskOwnerId) {
+    public Task(String title, String description, String dateTime, boolean done, int taskOwnerId) {
         this.title = title;
         this.description = description;
         this.dateTime = dateTime;
-        this.notify = notify;
         this.done = done;
         this.taskOwnerId = taskOwnerId;
     }
@@ -81,14 +79,6 @@ public class Task implements Parcelable {
     }
     public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
-    }
-
-    public boolean isNotify() {
-        return notify;
-    }
-
-    public void setNotify(boolean notify) {
-        this.notify = notify;
     }
 
     public boolean isDone() {

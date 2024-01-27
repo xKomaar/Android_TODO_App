@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import java.io.ByteArrayOutputStream;
 import java.time.ZoneId;
@@ -34,7 +35,7 @@ public class TaskViewActivity extends AppCompatActivity {
     private EditText titleEditText;
     private EditText descriptionEditText;
     private CheckBox isDoneCheckBox;
-    private CheckBox notifyCheckBox;
+    private Button notifyButton;
     private Button saveButton;
     private Task task;
     private Menu menu;
@@ -47,7 +48,7 @@ public class TaskViewActivity extends AppCompatActivity {
         dateTextView = findViewById(R.id.dateTextView);
         descriptionEditText = findViewById(R.id.descriptionEditText);
         isDoneCheckBox = findViewById(R.id.isDoneCheckBox);
-        notifyCheckBox = findViewById(R.id.notifyCheckBox);
+        notifyButton = findViewById(R.id.notifyButton);
         saveButton = findViewById(R.id.button_save);
 
         Intent intent = getIntent();
@@ -86,8 +87,13 @@ public class TaskViewActivity extends AppCompatActivity {
             isDoneCheckBox.setChecked(this.task.isDone());
             isDoneCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> this.task.setDone(isChecked));
 
-            notifyCheckBox.setChecked(this.task.isNotify());
-            notifyCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> this.task.setNotify(isChecked));
+            //tu jeszcze ustawic date powiadomienia na dzien przed taskiem i jakos go puścić
+            notifyButton.setOnClickListener(view -> {
+//                NotificationCompat.Builder builder = new NotificationCompat.Builder(this, task.getTaskId().toString())
+//                        .setContentTitle(getString(R.string.notification_title, getIntent().getStringExtra("profileName")))
+//                        .setContentText(getString(R.string.notification_body, task.getTitle()))
+//                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+            });
 
             saveButton.setOnClickListener(view -> {
                 if(!titleEditText.getText().toString().isEmpty()) {

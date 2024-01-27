@@ -1,4 +1,6 @@
 
+i
+java:S11927"LDefine a constant instead of duplicating this literal "profileName" 4 times.(Öæ§¬8‘áÑæÔ1
 l
 java:S1192<"JDefine a constant instead of duplicating this literal "profileId" 4 times.(ÙÎØÿÿÿÿÿ8ãÀßÔ1
 h
@@ -8,6 +10,6 @@ java:S1450*"SRemove the "menu" field and declare it as a local variable in the 
 `
 java:S1874{">Remove this use of "getParcelableArrayList"; it is deprecated.(çÚŒÛüÿÿÿÿ8«ÈßÔ1
 a
-java:S1874ì">Remove this use of "startActivityForResult"; it is deprecated.(ëÇÍáøÿÿÿÿ8µÈßÔ1
+java:S1874í">Remove this use of "startActivityForResult"; it is deprecated.(ëÇÍáøÿÿÿÿ8µÈßÔ1
 g
-java:S1874ò"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(¹Î¾8µÈßÔ1
+java:S1874ó"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(¹Î¾8µÈßÔ1
