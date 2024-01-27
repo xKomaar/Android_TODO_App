@@ -1,0 +1,15 @@
+
+‚
+java:S1450"`Remove the "changePhotoButton" field and declare it as a local variable in the relevant methods.(ƒ§Ï­üÿÿÿÿ8„»Ã¹Ô1
+
+java:S1450"bRemove the "createProfileButton" field and declare it as a local variable in the relevant methods.(Ù¤Þ¶8„»Ã¹Ô1
+…
+java:S1450 "cRemove the "profileNameTextField" field and declare it as a local variable in the relevant methods.(‰ªÞ¹ýÿÿÿÿ8„»Ã¹Ô1
+}
+java:S1450""`Remove the "profileRepository" field and declare it as a local variable in the relevant methods.(µñË±8„»Ã¹Ô1
+[
+java:S1874T">Remove this use of "startActivityForResult"; it is deprecated.(¤ü©Â8–»Ã¹Ô1
+f
+java:S1874Y"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(¹Î¾8–»Ã¹Ô1
+G
+java:S1874]"+Remove this use of "get"; it is deprecated.(¶õì>8–»Ã¹Ô1
