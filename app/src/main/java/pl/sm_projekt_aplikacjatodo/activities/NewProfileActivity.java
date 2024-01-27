@@ -35,7 +35,7 @@ public class NewProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.setTitle(getString(R.string.stworz_profil));
+        this.setTitle(getString(R.string.create_profil_title));
         setContentView(R.layout.activity_new_profile);
 
         profileRepository = new ProfileRepository(this.getApplication());

@@ -1,11 +1,7 @@
 
-F
-java:S5411à"(Use a primitive boolean expression here.(ò­ƒÔ8‰½âÙÔ1
 s
-java:S3252"PUse static access with "android.view.ViewGroup$LayoutParams" for "MATCH_PARENT".(ÒÖœªşÿÿÿÿ8€»»ÙÔ1
+java:S3252í"PUse static access with "android.view.ViewGroup$LayoutParams" for "MATCH_PARENT".(ÒÖœªşÿÿÿÿ8Œòú×Ô1
 n
-java:S3252"PUse static access with "android.view.ViewGroup$LayoutParams" for "WRAP_CONTENT".(ØªØ8Ù½âÙÔ1
+java:S3252î"PUse static access with "android.view.ViewGroup$LayoutParams" for "WRAP_CONTENT".(ØªØ8¼¸Ö×Ô1
 U
-java:S1874®"7Remove this use of "getFromLocation"; it is deprecated.(û¨Ü8İ½âÙÔ1
-_
-java:S1144—"ARemove this unused private "showDeleteConfirmationDialog" method.(ß×ô½8Æñ¼ÚÔ1
+java:S1874"7Remove this use of "getFromLocation"; it is deprecated.(û¨Ü8Â¸Ö×Ô1

@@ -1,9 +1,7 @@
 
-l
-java:S11921"JDefine a constant instead of duplicating this literal "profileId" 4 times.(ÙÎØÿÿÿÿÿ8€æ¸Ô1
-p
-java:S1450"SRemove the "menu" field and declare it as a local variable in the relevant methods.(î·öÁ8µæ¸Ô1
-a
-java:S1874‰">Remove this use of "startActivityForResult"; it is deprecated.(ëÇÍáøÿÿÿÿ8Èæ¸Ô1
-g
-java:S1874"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(¹Î¾8Èæ¸Ô1
+e
+java:S11921"JDefine a constant instead of duplicating this literal "profileId" 4 times.(ÙÎØÿÿÿÿÿ
+Z
+java:S1874‰">Remove this use of "startActivityForResult"; it is deprecated.(ëÇÍáøÿÿÿÿ
+`
+java:S1874"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(¹Î¾
