@@ -64,8 +64,8 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ActivityResultLauncher<String> requestPermissionLauncher;
     private ProfileRepository profileRepository;
-
     private ProgressBar loadingProgressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +95,18 @@ public class MainActivity extends AppCompatActivity {
 
         profileRepository = new ProfileRepository(this.getApplication());
         profileRepository.findAllProfiles().observe(this, profileAdapter::setProfiles);
+
+        requestPermissionLauncher = registerForActivityResult(
+                new ActivityResultContracts.RequestPermission(),
+                permissionGranted -> {
+                    if(permissionGranted) {
+                        checkWeatherBasedOnCurrentLocation();
+                    } else {
+                        Toast.makeText(this, R.string.location_permission_denied, Toast.LENGTH_SHORT).show();
+                        showLoading(false);
+                    }
+                }
+        );
 
         loadingProgressBar = findViewById(R.id.loadingProgressBar);
     }
@@ -203,17 +215,6 @@ public class MainActivity extends AppCompatActivity {
         if(ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            ActivityResultLauncher<String> requestPermissionLauncher = registerForActivityResult(
-                    new ActivityResultContracts.RequestPermission(),
-                    permissionGranted -> {
-                        if(permissionGranted) {
-                            checkWeatherBasedOnCurrentLocation();
-                        } else {
-                            Toast.makeText(this, R.string.location_permission_denied,
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-            );
             requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION);
         } else {
             LocationServices.getFusedLocationProviderClient(this).getLastLocation().addOnSuccessListener(location -> {
