@@ -44,6 +44,4 @@
     <string name="title_label">Task Name</string>
     <string name="date_label">Date</string>
     <string name="description_label">Description</string>
-    <string name="notification_title">Notification from profile %s</string>
-    <string name="notification_body">The date of task %s passes tomorrow!</string>
 </resources>
