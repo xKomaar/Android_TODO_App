@@ -156,7 +156,7 @@ public class TaskListActivity extends AppCompatActivity {
         }
 
         private void showDeleteConfirmationDialog() {
-            Dialog deleteConfirmationDialog = new Dialog(TaskListActivity.this);
+            Dialog deleteConfirmationDialog = new Dialog(TaskListActivity.this, R.style.cornered_box);
             deleteConfirmationDialog.setContentView(R.layout.delete_confirmation_dialog);
 
             TextView confirmationMessage = deleteConfirmationDialog.findViewById(R.id.confirmation_message);

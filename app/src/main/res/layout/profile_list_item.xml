@@ -41,6 +41,7 @@
         android:layout_height="75dp"
         android:layout_marginEnd="20dp"
         android:backgroundTint="@color/profile_launch_button_color"
+        android:background="@drawable/rounded_corner"
         android:src="@drawable/ic_arrow_right"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
