@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
             deleteButton.setOnClickListener(view -> showDeleteConfirmationDialog());
         }
         private void showDeleteConfirmationDialog() {
-            Dialog deleteConfirmationDialog = new Dialog(MainActivity.this);
+            Dialog deleteConfirmationDialog = new Dialog(MainActivity.this, R.style.cornered_box);
             deleteConfirmationDialog.setContentView(R.layout.delete_confirmation_dialog);
 
             TextView confirmationMessage = deleteConfirmationDialog.findViewById(R.id.confirmation_message);
@@ -245,7 +245,7 @@ public class MainActivity extends AppCompatActivity {
                                 TextView textViewWindSpeed = popupView.findViewById(R.id.textViewWindSpeed);
                                 textViewWindSpeed.setText(getString(R.string.wind_speed_label, weather.getWindSpeed()));
 
-                                Dialog popupDialog = new Dialog(MainActivity.this);
+                                Dialog popupDialog = new Dialog(MainActivity.this, R.style.cornered_box);
                                 popupDialog.setContentView(popupView);
 
                                 Button buttonClose = popupView.findViewById(R.id.buttonClose);
